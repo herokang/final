@@ -1,0 +1,2 @@
+class JudgeQuestion < Question
+end
