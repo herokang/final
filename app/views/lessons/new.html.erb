@@ -1,0 +1,6 @@
+<h1>课程创建</h1>
+<%= form_for @lesson,url: {action: :create} do |f| %>
+    课程名：<%= f.text_field :name %><br>
+    描述：<%= f.text_field :description %><br>
+    <%= submit_tag '创建' %>
+<% end %>

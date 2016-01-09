@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
         return SelectQuestion(description,optionList,reference,score)
       when QuestionType[:judge]
         return JudgeQuestion(description,reference,score)
-  end
+    end
   end
 end
 
