@@ -1,0 +1,20 @@
+<h1>课程首页</h1>
+<h2><%= flash[:notice] %></h2>
+<table>
+  <thead>
+  <tr>
+    <td>名称</td><td>描述</td><td>操作</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.name %></td>
+        <td><%= lesson.description %></td>
+        <td>
+          <a href="<%= edit_lesson_path(lesson) %>">编辑</a>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

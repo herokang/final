@@ -1,0 +1,6 @@
+<h1>编辑课程《<%= @lesson.name %>》</h1>
+<%= form_for @lesson,url: {action: :update} do |f| %>
+    课程名：<input id="lesson_name" name="lesson[name]" type="text" value="<%= @lesson.name %>"><br>
+    描述：<input id="lesson_description" name="lesson[description]" type="text" value="<%= @lesson.description %>"><br>
+    <%= submit_tag '更新' %>
+<% end %>
