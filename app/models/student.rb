@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class Student < ActiveRecord::Base
   has_many :home_works
   has_and_belongs_to_many :lessons
@@ -5,7 +7,7 @@ class Student < ActiveRecord::Base
 
   def self.profile(id, pwd)
     ret = []
-    @profile = Std.find(id)
+    @profile = Student.find(id)
     if @profile == nil || @profile.empty?
       ret[0] = 'the user not exist'
       ret[1] = -1
