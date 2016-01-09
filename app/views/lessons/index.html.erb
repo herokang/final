@@ -1,5 +1,6 @@
 <h1>课程首页</h1>
 <h2><%= flash[:notice] %></h2>
+<h3><a href="<%= new_lesson_path %>">创建</a></h3>
 <table>
   <thead>
   <tr>
@@ -13,6 +14,7 @@
         <td><%= lesson.description %></td>
         <td>
           <a href="<%= edit_lesson_path(lesson) %>">编辑</a>
+          <%= button_to 'Delete', lesson_path(lesson), :method => :delete, :confirm => 'Are you sure?' %>
         </td>
       </tr>
   <% end %>
