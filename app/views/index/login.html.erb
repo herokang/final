@@ -1,0 +1,42 @@
+<% content_for :head do %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>源题库 - 登录</title>
+    <%= stylesheet_link_tag "templatemo-style" %>
+<% end %>
+
+<body class="light-gray-bg">
+<div class="templatemo-content-widget templatemo-login-widget white-bg">
+  <header class="text-center">
+    <div class="square"></div>
+    <h1>欢迎登录</h1>
+  </header>
+  <form action="index" class="templatemo-login-form" method="get">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-user fa-fw">邮 箱</i></div>
+        <input type="text" class="form-control" placeholder="js@dashboard.com">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-key fa-fw">密 码</i></div>
+        <input type="password" class="form-control" placeholder="******">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox squaredTwo">
+        <input type="checkbox" id="c1" name="cc" />
+        <label for="c1"><span></span>记住我</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="templatemo-blue-button width-100">登录</button>
+    </div>
+  </form>
+</div>
+<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+  <p>还没注册？ <strong><a href="#" class="blue-text">现在就注册吧！</a></strong></p>
+</div>
+</body>
+</html>
