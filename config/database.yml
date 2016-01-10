@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   database: postgres
-  username: suemi
+  username: postgres
   password: 123456
   encoding: UTF8
   # For details on connection pooling, see rails configuration guide

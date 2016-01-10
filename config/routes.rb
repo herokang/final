@@ -1,33 +1,6 @@
 Rails.application.routes.draw do
-  get 'students/index'
 
-  get 'students/show'
-
-  get 'students/edit'
-
-  get 'students/update'
-
-  get 'students/destroy'
-
-  get 'users/index'
-
-  get 'users/create'
-
-  get 'users/destroy'
-
-  get 'users/show'
-
-  get 'users/edit'
-
-  get 'user/index'
-
-  get 'user/create'
-
-  get 'user/destroy'
-
-  get 'user/edit'
-
-  get 'user/show'
+  resources :lessons
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -83,5 +56,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  resources :quizs, :users
 end
