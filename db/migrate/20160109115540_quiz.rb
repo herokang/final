@@ -3,6 +3,7 @@ class Quiz < ActiveRecord::Migration
     create_table :quizs do |t|
       t.datetime :lastModified
       t.integer :status
+      t.belongs_to :lesson
     end
   end
 end

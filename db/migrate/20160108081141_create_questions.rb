@@ -6,6 +6,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string :reference
       t.integer :score
       t.integer :questionType
+      t.belongs_to :quiz
       t.timestamps
     end
   end

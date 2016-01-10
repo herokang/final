@@ -7,6 +7,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :name
       t.integer :userType
+      t.belongs_to :student
+      t.belongs_to :teacher
+      t.string :avatar
+      t.boolean :verified
     end
   end
 end

@@ -4,6 +4,7 @@ class CreateHomeWorks < ActiveRecord::Migration
       t.integer :grade
       t.datetime :lastModified
       t.integer :status
+      t.integer :quizId
     end
   end
 end
