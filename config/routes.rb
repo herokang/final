@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'index/index'
+
+  get 'index/login'
+
+  get 'index/register'
+
   get 'report/index'
 
   resources :users
@@ -12,5 +18,5 @@ Rails.application.routes.draw do
   post 'students/exit', to: "students#exit"
   get 'students/lessons', to: "students#lessons"
 
-
+  root 'index#index'
 end
