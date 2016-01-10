@@ -18,11 +18,15 @@ ActiveRecord::Schema.define(version: 20160109115540) do
 
   create_table "answers", force: true do |t|
     t.text     "record"
+    t.integer  "homeWork_id"
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "assignments", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "lesson_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,11 +35,15 @@ ActiveRecord::Schema.define(version: 20160109115540) do
     t.integer  "grade"
     t.datetime "lastModified"
     t.integer  "status"
+    t.integer  "quizId"
   end
 
   create_table "lessons", force: true do |t|
     t.string   "name"
     t.string   "lessonNo"
+    t.integer  "limit"
+    t.integer  "status"
+    t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160109115540) do
     t.string   "reference"
     t.integer  "score"
     t.integer  "questionType"
+    t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,16 +62,19 @@ ActiveRecord::Schema.define(version: 20160109115540) do
   create_table "quizs", force: true do |t|
     t.datetime "lastModified"
     t.integer  "status"
+    t.integer  "lesson_id"
   end
 
   create_table "students", force: true do |t|
     t.string   "studentNo"
+    t.boolean  "binded"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "teachers", force: true do |t|
     t.string   "teacherNo"
+    t.boolean  "binded"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,6 +87,10 @@ ActiveRecord::Schema.define(version: 20160109115540) do
     t.string   "email"
     t.string   "name"
     t.integer  "userType"
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.string   "avatar"
+    t.boolean  "verified"
   end
 
 end
