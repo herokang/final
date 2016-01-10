@@ -1,3 +1,0 @@
-
-class IllegalActionException <RuntimeError
-end
