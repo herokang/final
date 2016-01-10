@@ -50,7 +50,7 @@ class StudentsController < ApplicationController
   # @summary: 学生选课
   def attend
     @student=Student.find(session[:studentId])
-    lessonIds=params[:lessonIds]
+    lessonIds=params[:lessonIds] if params.has_key?(:lessonIds) else []
     for lessonId in lessonIds do
       lesson=Lesson.find(lessonId)
       if not lesson.nil?
@@ -71,6 +71,12 @@ class StudentsController < ApplicationController
 
   end
 
+  # @summary: 返回学生所选的课程
+  def lessons
+    @student=Student.find(session[:studentId])
+    @lessons=@student.lessons
+    redirect_to lessons_path
+  end
 
 
   def check_login

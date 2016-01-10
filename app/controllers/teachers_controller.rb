@@ -51,4 +51,12 @@ class TeachersController < ApplicationController
     flash[:notice] = "Teacher '#{@teacher.teacherNo}' deleted."
     redirect_to teachers_path
   end
+
+  # @summary: 返回教师所开课程
+  def lessons
+    @teacher=Teacher.find(session[:teacherId])
+    @lessons=@teacher.lessons
+    redirect_to lessons_path
+  end
+
 end
