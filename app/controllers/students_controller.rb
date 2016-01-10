@@ -1,6 +1,7 @@
-require 'utils/my_exception'
+require_relative '../utils/my_exception'
 
 class StudentsController < ApplicationController
+  include MyException
   before_action :check_login, :except => [:show]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = ex.message

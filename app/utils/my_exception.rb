@@ -1,6 +1,8 @@
+module MyException
+  class IllegalActionException < RuntimeError
+  end
 
-class IllegalActionException < RuntimeError
+  class UnAuthorizedException < RuntimeError
+  end
 end
 
-class UnAuthorizedException < RuntimeError
-end

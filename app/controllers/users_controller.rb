@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user=User.find_by(account :param[:account],password :param[:password])
+    @user=User.find_by(account: params[:account], password: params[:password])
     if @user.nil?
       flash[:notice] = "用户名密码错误!"
       redirect_to users_path

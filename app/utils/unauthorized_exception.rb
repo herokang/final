@@ -1,0 +1,3 @@
+
+class UnAuthorizedException < RuntimeError
+end

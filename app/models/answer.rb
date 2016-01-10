@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  belongs_to :question,dependent: delete, autosave: false
+  belongs_to :question,dependent: :delete, autosave: false
   def isRight()
     @realQuestion=question.transfer() if @realQuestion.nil?
     if question.questionType=Question::QuestionType[:selection]

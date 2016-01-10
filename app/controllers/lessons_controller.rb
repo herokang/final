@@ -1,7 +1,8 @@
-require 'utils/my_exception'
+require_relative '../utils/my_exception'
+
 
 class LessonsController < ApplicationController
-
+  include MyException
   before_action :check_login, :except => [:show,:index,:new]
   before_action :check_permission, :only => [:edit,:update,:destroy]
   rescue_from UnAuthorizedException do |ex|
@@ -28,11 +29,12 @@ class LessonsController < ApplicationController
   end
 
   def index
+    puts "hehe"
     @lessons = Lesson.all
   end
 
   def show
-    @lesson = Lesson.find params[:id]
+    @lesson = Lesson.find(params[:id])
   end
 
   def new

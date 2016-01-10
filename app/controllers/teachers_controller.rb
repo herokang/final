@@ -1,6 +1,6 @@
-require 'utils/my_exception'
-
+require_relative '../utils/my_exception'
 class TeachersController < ApplicationController
+  include MyException
   before_action :check_login, :except => [:show]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "请先登录对应身份的账户"
