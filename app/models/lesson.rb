@@ -5,6 +5,7 @@ class Lesson < ActiveRecord::Base
   STATUS={:attendable=>0,:active=>1,:over=>2}
   after_initialize :init
   def init
-    self.status=STATUS[:attendable]
+    self.status ||=STATUS[:attendable]
+    self.limit ||=100
   end
 end

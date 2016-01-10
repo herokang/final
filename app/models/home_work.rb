@@ -4,7 +4,7 @@ class HomeWork < ActiveRecord::Base
   STATUS={:uncommited=>0,:commited=>1,:commented=>2}
   after_initialize :init
   def init
-    self.status=STATUS[:uncommited]
+    self.status ||=STATUS[:uncommited]
   end
 
   # @summary: 为作业评分

@@ -62,4 +62,21 @@ class UsersController < ApplicationController
     @user.save()
     redirect_to user_path(@user)
   end
+
+  def login
+    @user=User.find_by(account :param[:account],password :param[:password])
+    if @user.nil?
+      flash[:notice] = "用户名密码错误!"
+      redirect_to users_path
+    end
+    case @user.userType
+      when User::UserType[:student]
+        session[:studentId]=@user.student.id
+      when User::UserType[:teacher]
+        session[:teacherId]=@user.teacher.id
+    end
+    flash[:notice] = "登录成功!"
+    redirect_to user_path(@user)
+  end
+
 end

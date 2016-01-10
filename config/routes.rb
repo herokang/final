@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
 
+  get 'lessons/create'
+
+  get 'lessons/destroy'
+
+  get 'lessons/show'
+
+  get 'lessons/edit'
+
+  get 'lessons/update'
+
+  get 'teachers/show'
+
+  get 'teachers/update'
+
+  get 'teachers/edit'
+
+  get 'teachers/destroy'
+
   resources :lessons
 
   # The priority is based upon order of creation: first created -> highest priority.
