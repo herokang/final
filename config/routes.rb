@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'report/index'
+
   resources :users
   resources :students,:teachers, only:[:show, :edit, :update, :destroy]
   resources :lessons, :quizs
