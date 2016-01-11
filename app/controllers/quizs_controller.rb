@@ -2,10 +2,10 @@ require_relative '../utils/my_exception'
 class QuizsController < ApplicationController
   include MyException
   before_action :check_login, :except => [:new]
-  before_action :check_permission, :only => [:edit,:update,:destroy, :show]
+  before_action :check_permission, :only => [:edit,:update,:destroy, :show, :publish]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "问卷操作必须要求老师帐号"
-    redirect_to quizs_path
+    redirect_to login_path
   end
 
   rescue_from IllegalActionException do |ex|
@@ -38,17 +38,42 @@ class QuizsController < ApplicationController
 
   # @summary: 返回登录教师创建的特定问卷
   def show
+    @quiz=Quiz.find(params[:id])
+    @quiz.generate()
   end
 
+  # @summary: 创建新问卷
   def create
   end
 
   def edit
+    @quiz=Quiz.find(params[:id])
+    @quiz.generate()
   end
+
 
   def update
   end
 
-  def destroy
+  # @summary: 通过老师上传的文件生成作业内容
+  def upload
+
   end
+
+  def destroy
+    @quiz=Quiz.find(params[:id])
+    if @quiz.status==Quiz::STATUS[:unassigned]
+      @quiz.destroy!
+      # homeworks=HomeWork.where(quizId:@quiz.id)
+      # homeworks.destroy_all
+    else
+      raise IllegalActionException,"已发布的作业不允许删除"
+    end
+  end
+
+  # @summary: 发布作业给学生,系统会为每位选课的学生自动生成一份Homework
+  def publish
+
+  end
+
 end
