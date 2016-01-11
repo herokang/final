@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'index', to: "index#index"
 
+  get 'reports/:quizId', to: "reports#show"
+
   resources :users
   resources :students,:teachers, only:[:show, :edit, :update, :destroy]
   resources :lessons, :quizs
