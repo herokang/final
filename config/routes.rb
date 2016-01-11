@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  get 'index/index'
 
-  get 'index/login'
 
-  get 'index/register'
+  get 'index', to: "index#index"
 
   get 'index/userlogin', to:"index#userlogin"
 
@@ -13,7 +11,7 @@ Rails.application.routes.draw do
   resources :students,:teachers, only:[:show, :edit, :update, :destroy]
   resources :lessons, :quizs
 
-  post 'login', to: "users#login"
+  post 'login', to: "index#login"
   get 'teachers/lessons', to: "teachers#lessons"
 
   post 'students/attend', to: "students#attend"

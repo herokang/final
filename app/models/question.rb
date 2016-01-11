@@ -21,26 +21,32 @@ class RealQuestion
   summary:本类是数据库中存取的Question转化而来的虚类
 =end
 
-  def toQuestion()
-    #存入数据库时调用该函数
+  def jsonMap
+    #返回存入数据库时实际的字典
   end
 
 end
 
 class SelectQuestion < RealQuestion
-  def initialize(description,options,reference,score)
-    @description=description
-    @options=options
-    @reference=reference
-    @score=score
+
+  # 从哈希构造实体
+  def initialize(info)
+
+  end
+
+  def jsonMap
+
   end
 
 end
 
 class JudgeQuestion < RealQuestion
-  def initialize(description,reference,score)
-    @description=description
-    @reference=reference
-    @score=score
+  # 从哈希构造实体
+  def initialize(info)
+
+  end
+
+  def jsonMap
+
   end
 end
