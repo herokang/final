@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-
+  get 'index/login'
+  get 'index/register'
+  get 'index/tmpTeacherIndex'
   get 'index', to: "index#index"
 
   get 'index/userlogin', to:"index#userlogin"
