@@ -12,5 +12,9 @@ class HomeWorksController < ApplicationController
   end
 
   def commit
+
+    #发送提交确认邮件
+    HomeworkNotifier.received(@homework).deliver
   end
+
 end
