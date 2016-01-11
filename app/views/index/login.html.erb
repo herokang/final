@@ -11,7 +11,7 @@
     <div class="square"></div>
     <h1>欢迎登录</h1>
   </header>
-  <form action="index" class="templatemo-login-form" method="get">
+  <form action="<%= index_userlogin_path %>" class="templatemo-login-form" method="get">
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-user fa-fw">邮 箱</i></div>
@@ -36,7 +36,7 @@
   </form>
 </div>
 <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-  <p>还没注册？ <strong><a href="#" class="blue-text">现在就注册吧！</a></strong></p>
+  <p>还没注册？ <strong><a href="<%= index_register_path %>" class="blue-text">现在就注册吧！</a></strong></p>
 </div>
 </body>
 </html>

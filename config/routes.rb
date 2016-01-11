@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'index/register'
 
+  get 'index/userlogin', to:"index#userlogin"
+
   get 'reports/:quizId', to: "reports#show"
 
   resources :users
