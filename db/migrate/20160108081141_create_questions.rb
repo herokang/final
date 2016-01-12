@@ -7,6 +7,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :score
       t.integer :questionType
       t.belongs_to :quiz
+      t.float :ratio #该问题的正确率
       t.timestamps
     end
   end

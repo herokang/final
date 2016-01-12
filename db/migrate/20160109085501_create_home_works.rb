@@ -5,6 +5,8 @@ class CreateHomeWorks < ActiveRecord::Migration
       t.datetime :lastModified
       t.integer :status
       t.integer :quizId
+      t.integer :interval
+      t.text :comment
     end
   end
 end
