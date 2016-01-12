@@ -28,7 +28,7 @@ class QuizsController < ApplicationController
     if params[:lessonId].nil?
       teacher=Teacher.find(session[:teacherId])
       lessonIds=teacher.lessons.map{|l| l.id}
-      @quizs=Quiz.where(lesson_id :lessonIds )
+      @quizs=Quiz.where(lesson_id: lessonIds )
     else
       lesson=Lesson.find(params[:lessonId])
       raise IllegalActionException,"不是本问卷的所有者" if lesson.teacher_id!=session[:teacherId]
