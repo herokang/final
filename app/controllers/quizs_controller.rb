@@ -18,9 +18,14 @@ class QuizsController < ApplicationController
   end
 
   def check_permission
+    raise IllegalActionException,"请至少选择一个问卷进行操作" if params[:id].nil?
     @quiz=Quiz.find(params[:id])
     raise IllegalActionException,"请选择有效的问卷进行操作" if @quiz.nil?
     raise IllegalActionException,"不是本问卷的所有者" if session[:teacherId]!=@quiz.lesson.teacher_id
+  end
+
+  def quiz_params
+    params.permit([:title,:demand,:limitTime,:number])
   end
 
   # @summary 返回登录教师在某课程下布置的所有问卷
@@ -38,16 +43,19 @@ class QuizsController < ApplicationController
 
   # @summary: 返回登录教师创建的特定问卷
   def show
-    @quiz=Quiz.find(params[:id])
+    # @quiz=Quiz.find(params[:id])
     @quiz.generate()
   end
 
   # @summary: 创建新问卷
   def create
+    raise IllegalActionException,"请指定创建问卷的课程" if params[:lessonId].nil?
+    lesson=Lesson.find(params[:lessonId])
+    @quiz=lesson.quizs.create!(quiz_params)
   end
 
   def edit
-    @quiz=Quiz.find(params[:id])
+    # @quiz=Quiz.find(params[:id])
     @quiz.generate()
   end
 
@@ -61,7 +69,7 @@ class QuizsController < ApplicationController
   end
 
   def destroy
-    @quiz=Quiz.find(params[:id])
+    # @quiz=Quiz.find(params[:id])
     if @quiz.status==Quiz::STATUS[:unassigned]
       @quiz.destroy!
       # homeworks=HomeWork.where(quizId:@quiz.id)

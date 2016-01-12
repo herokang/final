@@ -34,7 +34,7 @@ class HomeWorksController < ApplicationController
     end
   end
 
-  def homeWorkParams
+  def home_work_params
     params.permit([:answers,:interval])
   end
 
@@ -69,7 +69,7 @@ class HomeWorksController < ApplicationController
   def update
     # @homeWork=HomeWork.find(params[:id])
     raise IllegalActionException,"不得更改已提交的作业" if @homeWork.status==HomeWork::STATUS[:commited]
-    info=homeWorkParams
+    info=home_work_params
     if not info[:answers].nil?
       raise IllegalActionException,"非法的请求参数" if not info[:answers].is_a? Array
       raise IllegalActionException,"非法的请求参数" if info[:answers].size != @homeWork.answers.length
