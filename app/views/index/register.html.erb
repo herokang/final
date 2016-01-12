@@ -1,2 +1,38 @@
-<h1>Index#register</h1>
-<p>Find me in app/views/index/register.html.erb</p>
+<% content_for :head do %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>源题库 - 注册</title>
+    <%= stylesheet_link_tag "templatemo-style" %>
+<% end %>
+
+<div class="templatemo-content-container">
+  <div class="templatemo-content-widget white-bg">
+    <h2 class="margin-bottom-10">源题库 - 注册</h2>
+    <p>欢迎注册源题库</p>
+    <form action="<%= index_login_url %>" class="templatemo-login-form" method="get" enctype="multipart/form-data">
+      <div class="row form-group">
+        <div class="col-lg-6 col-md-6 form-group">
+          <label for="inputUsername">用户名</label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Admin">
+        </div>
+        <div class="col-lg-6 col-md-6 form-group">
+          <label for="inputEmail">邮箱</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="admin@company.com">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-6 col-md-6 form-group">
+          <label for="inputNewPassword">密码</label>
+          <input type="password" class="form-control" id="inputNewPassword">
+        </div>
+        <div class="col-lg-6 col-md-6 form-group">
+          <label for="inputConfirmNewPassword">确认密码</label>
+          <input type="password" class="form-control" id="inputConfirmNewPassword">
+        </div>
+      </div>
+      <div class="form-group text-right">
+        <button type="submit" class="templatemo-blue-button">注册</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>源题库 - 登录</title>
+  <title>源题库 - 主页</title>
     <%= stylesheet_link_tag "templatemo-style" %>
 <% end %>
 
@@ -11,32 +11,32 @@
     <div class="square"></div>
     <h1>欢迎登录</h1>
   </header>
-  <form action="index.html" class="templatemo-login-form">
+  <form action="<%= index_userlogin_path %>" class="templatemo-login-form" method="get">
     <div class="form-group">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+        <div class="input-group-addon"><i class="fa fa-user fa-fw">邮 箱</i></div>
         <input type="text" class="form-control" placeholder="js@dashboard.com">
       </div>
     </div>
     <div class="form-group">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
+        <div class="input-group-addon"><i class="fa fa-key fa-fw">密 码</i></div>
         <input type="password" class="form-control" placeholder="******">
       </div>
     </div>
     <div class="form-group">
       <div class="checkbox squaredTwo">
         <input type="checkbox" id="c1" name="cc" />
-        <label for="c1"><span></span>Remember me</label>
+        <label for="c1"><span></span>记住我</label>
       </div>
     </div>
     <div class="form-group">
-      <button type="submit" class="templatemo-blue-button width-100">Login</button>
+      <button type="submit" class="templatemo-blue-button width-100">登录</button>
     </div>
   </form>
 </div>
 <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-  <p>Not a registered user yet? <strong><a href="#" class="blue-text">Sign up now!</a></strong></p>
+  <p>还没注册？ <strong><a href="#" class="blue-text">现在就注册吧！</a></strong></p>
 </div>
 </body>
 </html>

@@ -2,21 +2,22 @@
 
 class IndexController < ApplicationController
   def index
+    render 'index/login'
   end
 
   def login
-    @user=User.find_by(account: params[:account], password: params[:password])
-    if @user.nil?
-      flash[:notice] = "用户名密码错误!"
-      redirect_to users_path
-    end
-    case @user.userType
-      when User::UserType[:student]
-        session[:studentId]=@user.student.id
-      when User::UserType[:teacher]
-        session[:teacherId]=@user.teacher.id
-    end
-    flash[:notice] = "登录成功!"
-    redirect_to user_path(@user)
   end
+
+  def userlogin
+    render 'index/login'
+  end
+
+  def register
+  end
+
+  #以下方法和页面为静态页面，后期填数据时再往相关的views里面套
+  def tmpTeacherIndex
+
+  end
+
 end
