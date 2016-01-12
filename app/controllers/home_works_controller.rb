@@ -83,13 +83,6 @@ class HomeWorksController < ApplicationController
 
   # @summay: 学生提交作业,后台自动评分
   def commit
-<<<<<<< HEAD
-
-
-    #发送提交确认邮件
-    #HomeworkNotifier.commited(@homework).deliver
-    
-=======
     # @homeWork=HomeWork.find(params[:id])
     raise IllegalActionException,"不得提交已提交的作业" if @homeWork.status==HomeWork::STATUS[:commited]
     if not params[:answers].nil?
@@ -104,6 +97,5 @@ class HomeWorksController < ApplicationController
     @homeWork.comment()
     @homeWork.save()
     # TODO 返回提交成功
->>>>>>> 0fdff1c6f0753f9f27af51ef8e4521638baa8093
   end
 end
