@@ -88,6 +88,7 @@ class HomeWorksController < ApplicationController
       end
     end
     @homeWork.interval=info[:interval] if not info[:interval.nil?] and info[:interval]<@homeWork.interval
+    @homeWork.save!
     # TODO 返回修改成功
   end
 

@@ -28,6 +28,10 @@ class QuizsController < ApplicationController
     params.permit([:title,:demand,:limitTime,:number])
   end
 
+  def new
+    @quiz=Quiz.new
+  end
+
   # @summary 返回登录教师在某课程下布置的所有问卷
   def index
     if params[:lessonId].nil?
@@ -123,7 +127,7 @@ class QuizsController < ApplicationController
       homework.save
     end
     @quiz.status=Quiz::STATUS[:assigned]
-
+    @quiz.save
   end
 
   # @summary: 生成作业情况统计报告

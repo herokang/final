@@ -29,6 +29,10 @@ class QuestionsController < ApplicationController
   end
 
 
+  def new
+    @question=Question.new
+  end
+
   def create
     raise IllIllegalActionException,"请先指定对应的作业!" if params[:quizId].nil?
     quiz=Quiz.find(params[:quizId])
