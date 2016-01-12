@@ -6,5 +6,6 @@ class AddIntervalToHomeWork < ActiveRecord::Migration
     add_column :home_works, :comment, :text
     add_column :questions, :ratio, :float
     add_column :quizs, :number, :integer
+    add_belongs_to :home_works, :student
   end
 end
