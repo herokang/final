@@ -6,7 +6,7 @@ class CreateHomeWorks < ActiveRecord::Migration
       t.integer :status
       t.integer :quizId
       t.integer :interval
-      t.text :compute
+      t.text :comment
       t.belongs_to :student
     end
   end
