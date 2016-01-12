@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   get 'index/userlogin', to:"index#userlogin"
 
-  get 'reports/:quizId', to: "reports#show"
-
   resources :users
   resources :students,:teachers, only:[:show, :edit, :update, :destroy]
   resources :lessons, :quizs

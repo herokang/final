@@ -15,7 +15,7 @@ class HomeWorksController < ApplicationController
 
 
     #发送提交确认邮件
-    HomeworkNotifier.commited(@homework).deliver
+    #HomeworkNotifier.commited(@homework).deliver
     
   end
 
