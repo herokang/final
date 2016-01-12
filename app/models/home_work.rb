@@ -5,6 +5,7 @@ class HomeWork < ActiveRecord::Base
   after_initialize :init
   def init
     self.status ||=STATUS[:uncommited]
+    self.interval=600 #默认作业剩下的时间为10分钟
   end
 
   # @summary: 为作业评分

@@ -4,13 +4,19 @@ require 'json'
 
 class Question < ActiveRecord::Base
   QuestionType={:selection => 0,:judge => 1}
+  after_initialize :init
+  def init
+    self.ratio=0.0
+  end
   def transfer()
+
+    info={:descrption => self.description,:score => self.score, :reference => self.reference, :id=>self.id}
     case questionType
       when QuestionType[:selection]
-        optionList=JSON.parse options
-        return SelectQuestion(description,optionList,reference,score)
+        info[:options]=JSON.parse self.options
+        return SelectQuestion(info)
       when QuestionType[:judge]
-        return JudgeQuestion(description,reference,score)
+        return JudgeQuestion(info)
     end
   end
 end
@@ -31,7 +37,10 @@ class SelectQuestion < RealQuestion
 
   # 从哈希构造实体
   def initialize(info)
-
+    @description=info[:descrption]
+    @options=info[:options]
+    @score=info[:score]
+    @reference=info[:reference]
   end
 
   def jsonMap
@@ -43,7 +52,9 @@ end
 class JudgeQuestion < RealQuestion
   # 从哈希构造实体
   def initialize(info)
-
+    @description=info[:descrption]
+    @score=info[:score]
+    @reference=info[:reference]
   end
 
   def jsonMap
