@@ -24,9 +24,9 @@ class HomeWorksController < ApplicationController
 
   def check_permission
     @homeWork=HomeWork.find(params[:id])
-    if not session[:studentId]
+    if not session[:studentId].nil?
       raise IllegalActionException,"无权操作此作业" if @homeWork.student_id!=session[:studentId]
-    elsif not session[:teacherId]
+    elsif not session[:teacherId].nil?
       quiz=Quiz.find(@homeWork.quizId)
       raise IllegalActionException,"无权操作此作业" if quiz.lesson.teacher_id!=session[:teacherId]
     else
@@ -42,8 +42,18 @@ class HomeWorksController < ApplicationController
   def list
     if not session[:teacherId].nil?
       if params[:quizId].nil?
+        lessons=Teacher.find(session[:teacherId]).lessons
+        quizIds=[]
+        for lesson in lessons
+          quizIds+=lessons.quizs.map{|q| q.id}
+        end
+        @homeWorks=HomeWork.where(quizId:params[:quizId]).not(status: HomeWork::STATUS[:uncommited])
+        # @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
+        # @homeWorks=@homeWorks+HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commented])
       else
-        @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
+        @homeWorks=HomeWork.where(quizId:params[:quizId]).not(status: HomeWork::STATUS[:uncommited])
+        # @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
+        # @homeWorks=@homeWorks+HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commented])
       end
     elsif not session[:studentId].nil?
       if params[:lessonId].nil?
@@ -68,7 +78,7 @@ class HomeWorksController < ApplicationController
 
   def update
     # @homeWork=HomeWork.find(params[:id])
-    raise IllegalActionException,"不得更改已提交的作业" if @homeWork.status==HomeWork::STATUS[:commited]
+    raise IllegalActionException,"不得更改已提交的作业" if @homeWork.status!=HomeWork::STATUS[:uncommited]
     info=home_work_params
     if not info[:answers].nil?
       raise IllegalActionException,"非法的请求参数" if not info[:answers].is_a? Array
@@ -84,7 +94,7 @@ class HomeWorksController < ApplicationController
   # @summay: 学生提交作业,后台自动评分
   def commit
     # @homeWork=HomeWork.find(params[:id])
-    raise IllegalActionException,"不得提交已提交的作业" if @homeWork.status==HomeWork::STATUS[:commited]
+    raise IllegalActionException,"不得提交已提交的作业" if @homeWork.status!=HomeWork::STATUS[:uncommited]
     if not params[:answers].nil?
       raise IllegalActionException,"非法的请求参数" if not params[:answers].is_a? Array
       raise IllegalActionException,"非法的请求参数" if params[:answers].size != @homeWork.answers.length
@@ -94,8 +104,17 @@ class HomeWorksController < ApplicationController
     end
     @homeWork.status=HomeWork::STATUS[:commited]
     @homeWork.interval=0
-    @homeWork.comment()
+    @homeWork.compute()
     @homeWork.save()
     # TODO 返回提交成功
   end
+
+  # @summary: 教师为该作业写评语
+  def comment
+    raise IllegalActionException,"未提交的作业不得写评语" if @homeWork.status=HomeWork::STATUS[:uncommited]
+    @homeWork.comment=params[:compute]
+    @homeWork.status=HomeWork::STATUS[:commented]
+    @homeWork.save
+  end
+
 end

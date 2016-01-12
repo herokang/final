@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   belongs_to :question,dependent: :delete, autosave: false
+  # belongs_to :home_work, dependent: :delete, autosave: false
   def discriminate()
     @realQuestion=@question.transfer() if @realQuestion.nil?
     flag=true

@@ -8,8 +8,20 @@ class HomeWork < ActiveRecord::Base
     self.interval=600 #默认作业剩下的时间为10分钟
   end
 
-  # @summary: 为作业评分
-  def comment()
-
+  # @summary: 为作业评分,同时为对应的作业题增加统计量
+  def compute()
+    sum=0
+    for answer in @answers
+      question=answer.question
+      question.count+=1
+      if answer.discriminate
+        question.correct+=1
+        sum+=question.score
+      end
+      question.save!
+      # answer.save!
+    end
+    self.grade=sum
+    return sum
   end
 end
