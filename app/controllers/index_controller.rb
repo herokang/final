@@ -20,4 +20,15 @@ class IndexController < ApplicationController
 
   end
 
+  def StudentCourse
+
+  end
+
+  def Studenthomework
+
+  end
+
+  def Studenthomeworkonline
+
+  end
 end

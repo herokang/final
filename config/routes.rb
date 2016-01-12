@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get 'index/tmpTeacherIndex'
   get 'index', to: "index#index"
 
-  get 'index/userlogin', to:"index#userlogin"
+  get 'index/Studenthomework'
+  get 'index/Studenthomeworkonline'
+  get 'index/StudentCourse'
 
-  get 'reports/:quizId', to: "reports#show"
+  get 'index/userlogin', to:"index#userlogin"
 
   resources :users
   resources :students,:teachers, only:[:show, :edit, :update, :destroy]
