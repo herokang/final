@@ -1,4 +1,7 @@
+<% if flash[:notice] %>
 <div class="templatemo-content-widget pink-bg">
   <i class="fa fa-times"></i>
   <p class="margin-bottom-0"><%= flash[:notice] %></p>
 </div>
+<% flash[:notice]=nil %>
+<% end %>

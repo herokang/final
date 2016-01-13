@@ -28,7 +28,7 @@ class IndexController < ApplicationController
       when User::UserType[:teacher]
         session[:teacherId]=@user.teacher.id
     end
-    flash[:notice] = "登录成功!"
+    # flash[:notice] = "登录成功!"
     redirect_to "/index"
 
     # TODO 登录成功逻辑
