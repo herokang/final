@@ -13,15 +13,11 @@
 <% end %>
 
 <body>
-<% if flash[:notice] %>
-    <%= render 'layouts/notice' %>
-<% end %>
-
 <!-- Left column -->
 <div class="templatemo-flex-row">
   <div class="templatemo-sidebar">
     <header class="templatemo-site-header">
-      <h1>&nbsp;&nbsp;&nbsp;X老师好！</h1>
+      <h1><%= @teacher.user.name %>&nbsp;老师好！</h1>
     </header>
     <div class="mobile-menu-icon">
       <i class="fa fa-bars"></i>
@@ -30,7 +26,7 @@
       <ul>
         <li><a href="#" class="active"><i class="fa fa-home fa-fw"></i>课程管理</a></li>
         <li><a href="que_entry.html"><i class="fa fa-sliders fa-fw"></i>题目管理</a></li>
-        <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>退出</a></li>
+        <li><a href="<%= index_logout_path %>"><i class="fa fa-eject fa-fw"></i>退出</a></li>
       </ul>
     </nav>
   </div>
@@ -51,76 +47,15 @@
             </tr>
             </thead>
             <tbody>
-            <% for @lesson in @lessons do %>
-                <td><%= @lesson.lessonNo %></td>
-                <td><%= @lesson.name %></td>
-                <td><%= @lesson.teacher %></td>
-                <td><a href="look_quizs" class="templatemo-edit-btn">查看</a></td>
-                <td><a href="del_class" class="templatemo-edit-btn">删除</a></td>
+            <% for lesson in @teacher.lessons %>
+            <tr>
+              <td><%= lesson.lessonNo %></td>
+              <td><%= lesson.name %></td>
+              <td><%= @teacher.user.name %></td>
+              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
+              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
+            </tr>
             <% end %>
-            <tr>
-              <td>1.</td>
-              <td>John</td>
-              <td>Smith</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>2.</td>
-              <td>Bill</td>
-              <td>Jones</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>Mary</td>
-              <td>James</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>4.</td>
-              <td>Steve</td>
-              <td>Bride</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>5.</td>
-              <td>Paul</td>
-              <td>Richard</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>6.</td>
-              <td>Steve</td>
-              <td>Bride</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>7.</td>
-              <td>Paul</td>
-              <td>Richard</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>8.</td>
-              <td>Steve</td>
-              <td>Bride</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
-            <tr>
-              <td>9.</td>
-              <td>Paul</td>
-              <td>Richard</td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">查看</a></td>
-              <td><a href="que_entry.html" class="templatemo-edit-btn">删除</a></td>
-            </tr>
             </tbody>
           </table>
         </div>
@@ -180,8 +115,4 @@
       </div>
     </div>
   </div>
-  <!-- JS -->
-  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>        <!-- jQuery -->
-  <script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>  <!-- http://markusslima.github.io/bootstrap-filestyle/ -->
-  <script type="text/javascript" src="js/templatemo-script.js"></script>        <!-- Templatemo Script -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</div>
