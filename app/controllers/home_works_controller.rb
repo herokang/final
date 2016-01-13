@@ -50,11 +50,11 @@ class HomeWorksController < ApplicationController
         for lesson in lessons
           quizIds+=lessons.quizs.map{|q| q.id}
         end
-        @homeWorks=HomeWork.where(quizId:params[:quizId]).not(status: HomeWork::STATUS[:uncommited])
+        @homeWorks=HomeWork.where("quizId = ? AND status > ?",params[:quizId],HomeWork::STATUS[:uncommited])
         # @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
         # @homeWorks=@homeWorks+HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commented])
       else
-        @homeWorks=HomeWork.where(quizId:params[:quizId]).not(status: HomeWork::STATUS[:uncommited])
+        @homeWorks=HomeWork.where("quizId = ? AND status > ?",params[:quizId],HomeWork::STATUS[:uncommited])
         # @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
         # @homeWorks=@homeWorks+HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commented])
       end
