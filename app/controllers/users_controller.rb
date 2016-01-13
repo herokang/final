@@ -37,6 +37,8 @@ class UsersController < ApplicationController
     end
 
     flash[:notice] = "用户创建成功!"
+
+    redirect_to index_login_path
   end
 
   def destroy

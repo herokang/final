@@ -81,6 +81,11 @@ class StudentsController < ApplicationController
     render "" # TODO
   end
 
+  #所有课程
+  def alllessons
+    
+  end
+
 
   def check_login
     raise UnAuthorizedException,"学生账户未登录" if session[:studentId].nil?
