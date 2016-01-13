@@ -10,8 +10,10 @@ module QuestionsHelper
 
     def self.instance(info)
       if info[:options].is_a? Hash
-        info[:options]=info[:options].sort{|k,v| k.to_i<=>v.to_i}
+        info[:options]=info[:options].sort{|a,b| a[0].to_i<=>b[0].to_i}
+        info[:options]=info[:options].map{|x| x[1]}
       end
+
       info[:questionType]= info[:questionType].to_i
       if info[:questionType]==Question::QuestionType[:single]
         return SingleQuestion.new(info)
@@ -30,7 +32,7 @@ module QuestionsHelper
 
     # 从哈希构造实体
     def initialize(info)
-      @description=info[:descrption]
+      @description=info[:description]
       @options=info[:options]
       @score=info[:score]
       @reference=info[:reference]
@@ -53,7 +55,7 @@ module QuestionsHelper
   class JudgeQuestion < RealQuestion
     # 从哈希构造实体
     def initialize(info)
-      @description=info[:descrption]
+      @description=info[:description]
       @score=info[:score]
       @reference=info[:reference]
       @questionType=info[:questionType]
@@ -73,7 +75,7 @@ module QuestionsHelper
   class SingleQuestion < RealQuestion
     # 从哈希构造实体
     def initialize(info)
-      @description=info[:descrption]
+      @description=info[:description]
       @score=info[:score]
       @options=info[:options]
       @reference=info[:reference]
