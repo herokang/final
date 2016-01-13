@@ -42,12 +42,13 @@ class QuizsController < ApplicationController
       # teacher=Teacher.find(session[:teacherId])
       lessonIds=@teacher.lessons.map{|l| l.id}
       @quizs=Quiz.where(lesson_id: lessonIds )
+      render 'teachers/exercise'
     else
-      lesson=Lesson.find(params[:lessonId])
-      raise IllegalActionException,"不是本问卷的所有者" if lesson.teacher_id!=session[:teacherId]
-      @quizs=lesson.quizs
+      @lesson=Lesson.find(params[:lessonId])
+      raise IllegalActionException,"不是本问卷的所有者" if @lesson.teacher_id!=session[:teacherId]
+      @quizs=@lesson.quizs
+      render 'teachers/exercise_manage'
     end
-    render 'teachers/exercise'
   end
 
   # @summary: 返回登录教师创建的特定问卷
@@ -78,6 +79,7 @@ class QuizsController < ApplicationController
       end
       @quiz.save
     end
+    redirect_to teachers_exercise_path+"?lessonId="+params[:lessonId]
   end
 
   def edit

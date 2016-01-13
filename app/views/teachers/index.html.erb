@@ -52,7 +52,7 @@
               <td><%= lesson.lessonNo %></td>
               <td><%= lesson.name %></td>
               <td><%= @teacher.user.name %></td>
-              <td><a href="exercise_manage.html.erb" class="templatemo-edit-btn">管理</a></td>
+              <td><a href="<%= teachers_exercise_path %>?lessonId=<%= lesson.id %>" class="templatemo-edit-btn">管理</a></td>
 
               <td>删除</td>
 
