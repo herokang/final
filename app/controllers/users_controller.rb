@@ -26,11 +26,9 @@ class UsersController < ApplicationController
       redirect_to "/index/register"
       return
     end
-
-    userParam[:userType]=User::UserType[:student] if userParam[:userType]!=User::UserType[:teacher]
-    puts userParam
+    # userParam[:userType]=User::UserType[:student] if userParam[:userType]!=User::UserType[:teacher].to
     @user=User.create!(userParam)
-    case userParam[:userType]
+    case @user.userType
       when User::UserType[:student]
         @user.create_student!()
       when User::UserType[:teacher]
