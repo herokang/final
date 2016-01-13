@@ -60,4 +60,7 @@ class TeachersController < ApplicationController
     redirect_to lessons_path
   end
 
+  def index
+    
+  end
 end

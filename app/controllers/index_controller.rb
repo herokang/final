@@ -5,10 +5,10 @@ class IndexController < ApplicationController
   def index
     if not session[:studentId].nil?
       @student=Student.find(session[:studentId])
-      render ""
+      render "students/index"
     elsif not session[:teacherId].nil?
       @teacher=Teacher.find(session[:teacherId])
-      render ""
+      render "teachers/index"
     else
       # flash[:notice] = '请登录'
       render "index/login"
