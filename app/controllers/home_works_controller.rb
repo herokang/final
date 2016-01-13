@@ -27,9 +27,11 @@ class HomeWorksController < ApplicationController
     @homeWork=HomeWork.find(params[:id])
     if not session[:studentId].nil?
       raise IllegalActionException,"无权操作此作业" if @homeWork.student_id!=session[:studentId]
+      @student=Student.find(session[:studentId])
     elsif not session[:teacherId].nil?
       quiz=Quiz.find(@homeWork.quizId)
       raise IllegalActionException,"无权操作此作业" if quiz.lesson.teacher_id!=session[:teacherId]
+      @teacher=Teacher.find(session[:teacherId])
     else
       raise UnAuthorizedException
     end
@@ -41,9 +43,9 @@ class HomeWorksController < ApplicationController
 
   # @summary: 对于教师用户返回特定问卷的所有已提交作业,对于学生返回特定课程下的所有作业
   def list
-    if not session[:teacherId].nil?
+    if not @teacher.nil?
       if params[:quizId].nil?
-        lessons=Teacher.find(session[:teacherId]).lessons
+        lessons=@teacher.lessons
         quizIds=[]
         for lesson in lessons
           quizIds+=lessons.quizs.map{|q| q.id}
@@ -56,10 +58,10 @@ class HomeWorksController < ApplicationController
         # @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
         # @homeWorks=@homeWorks+HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commented])
       end
-    elsif not session[:studentId].nil?
+    elsif not @student.nil?
       if params[:lessonId].nil?
         #返回学生所有的作业
-        @homeWorks=Student.find(session[:studentId]).home_works
+        @homeWorks=@student.home_works
       else
         quizIds=Lesson.find(params[:lessonId]).quizs.map{|q| q.id}
         @homeWorks=HomeWork.where(quizId:quizIds,student_id:session[:studentId])

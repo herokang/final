@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
 
   def check_login
     raise UnAuthorizedException if session[:teacherId].nil?
+    @teacher=Teacher.find(session[:teacherId])
   end
 
   def check_permission

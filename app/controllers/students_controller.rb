@@ -14,6 +14,10 @@ class StudentsController < ApplicationController
     redirect_to student_path(@student)
   end
 
+  def check_login
+    raise UnAuthorizedException,"学生账户未登录" if session[:studentId].nil?
+    @student=Student.find(session[:studentId])
+  end
 
   def studentParams
     params.permit(:studentNo)
@@ -28,11 +32,11 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    @student=Student.find(session[:studentId])
+    # @student=Student.find(session[:studentId])
   end
 
   def update
-    @student=Student.find(session[:studentId])
+    # @student=Student.find(session[:studentId])
     info=studentParams()
     if not info[:studentNo].nil? and Student.where(studentNo: info[:studentNo]).exists?
       raise IllegalActionException, "绑定学号失败"
@@ -44,7 +48,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    @student=Student.find(session[:studentId])
+    # @student=Student.find(session[:studentId])
     @student.destroy
     flash[:notice] = "Student '#{@student.studentNo}' deleted."
     redirect_to students_path
@@ -52,7 +56,7 @@ class StudentsController < ApplicationController
 
   # @summary: 学生选课
   def attend
-    @student=Student.find(session[:studentId])
+    # @student=Student.find(session[:studentId])
     lessonId=params[:lessonId]
     if params.has_key?(:lessonId)
       lesson=Lesson.find(lessonId)
@@ -79,7 +83,7 @@ class StudentsController < ApplicationController
 
   # @summary: 返回学生所选的课程
   def lessons
-    @student=Student.find(session[:studentId])
+    # @student=Student.find(session[:studentId])
     @lessons=@student.lessons
     render "" # TODO
   end

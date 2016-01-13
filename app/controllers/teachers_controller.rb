@@ -16,6 +16,7 @@ class TeachersController < ApplicationController
 
   def check_login
     raise UnAuthorizedException,"教师账户未登录" if session[:teacherId].nil?
+    @teacher=Teacher.find(session[:teacherId])
   end
 
   def paging
@@ -40,11 +41,11 @@ class TeachersController < ApplicationController
   end
 
   def edit
-    @teacher=Teacher.find(session[:teacherId])
+    # @teacher=Teacher.find(session[:teacherId])
   end
 
   def update
-    @teacher=Teacher.find(session[:teacherId])
+    # @teacher=Teacher.find(session[:teacherId])
     info=teacherParams()
     if not info[:studentNo].nil? and Teacher.where(teacherNo: info[:teacherNo]).exists?
       raise IllegalActionException, "绑定工号失败"
@@ -57,7 +58,7 @@ class TeachersController < ApplicationController
 
 
   def destroy
-    @teacher=Student.find(session[:teacherId])
+    # @teacher=Teacher.find(session[:teacherId])
     @teacher.destroy
     flash[:notice] = "Teacher '#{@teacher.teacherNo}' deleted."
     redirect_to teachers_path
@@ -65,7 +66,7 @@ class TeachersController < ApplicationController
 
   # @summary: 返回教师所开课程
   def lessons
-    @teacher=Teacher.find(session[:teacherId])
+    # @teacher=Teacher.find(session[:teacherId])
     # @lessons=@teacher.lessons
     @lessons=@teacher.lessons[@pageCount*@currentPage,@pageCount]
     redirect_to lessons_path
