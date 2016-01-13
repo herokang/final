@@ -53,18 +53,21 @@ class StudentsController < ApplicationController
   # @summary: 学生选课
   def attend
     @student=Student.find(session[:studentId])
-    lessonIds=params[:lessonIds] if params.has_key?(:lessonIds) else []
-    for lessonId in lessonIds do
+    lessonId=params[:lessonId]
+    if params.has_key?(:lessonId)
       lesson=Lesson.find(lessonId)
       if not lesson.nil?
       #if not lesson.nil? and lesson.status==Lesson::STATUS[:attenable] and lesson.students.size < lesson.limit
         @student.lessons<<lesson
+        @student.save
+        flash[:notice] = "选课《#{lesson.name}》成功！"
+      else
+        flash[:notice] = "课程不存在"
       end
-
+    else
+      flash[:notice] = "没有lessonId参数"
     end
-    @student.save
-
-    # TODO 增加页面返回代码
+    redirect_to index_path
   end
 
   # @summary: 学生退课

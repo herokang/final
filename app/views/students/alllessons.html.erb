@@ -54,22 +54,10 @@
               <% if lesson.isAttend %>
                   <td><div class="templatemo-edit-btn">已选</div></td>
               <% else %>
-              <td><a href="" class="templatemo-edit-btn">选择该课程</a></td>
+              <td><a href="<%= students_attend_path %>?lessonId=<%= lesson.id %>" class="templatemo-edit-btn">选择该课程</a></td>
               <% end %>
             </tr>
-            <tr>
-              <td>2.</td>
-              <td>数理逻辑</td>
-              <td>高出数</td>
-              <td><a href="" class="templatemo-edit-btn">已选</a></td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>数据挖掘</td>
-              <td>都已提交</td>
-              <td><a href="" class="templatemo-edit-btn">选择该课程</a></td>
-            </tr>
-
+            <% end %>
             </tbody>
           </table>
         </div>
