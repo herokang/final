@@ -10,5 +10,8 @@ class Lesson < ActiveRecord::Base
     self.limit ||=100
   end
 
+  def isAttend(student)
+    return true if Assignment.exists?(lesson_id:self.id,student_id:student.id)
+  end
 
 end
