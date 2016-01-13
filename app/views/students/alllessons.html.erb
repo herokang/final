@@ -18,9 +18,9 @@
     </div>
     <nav class="templatemo-left-nav">
       <ul>
-        <li><a href="index.html" class="active"><i class="fa fa-home fa-fw"></i>课程</a></li>
+        <li><a href="<%= index_url %>" class="active"><i class="fa fa-home fa-fw"></i>课程</a></li>
         <li><a href="data-visualization.html"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
-        <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>退出</a></li>
+        <li><a href="<%= index_logout_path %>"><i class="fa fa-eject fa-fw"></i>退出</a></li>
       </ul>
     </nav>
   </div>
@@ -45,9 +45,9 @@
                   <td><%= lesson.name %></td>
                   <td><%= lesson.teacher.user.name %></td>
                   <% if lesson.isAttend(@student) %>
-                      <td><div class="templatemo-edit-btn">已选</div></td>
+                      <td><a class="templatemo-edit-btn">已选</a></td>
                   <% else %>
-                      <td><a href="<%= students_attend_path %>?lessonId=<%= lesson.id %>" class="templatemo-edit-btn">选择该课程</a></td>
+                      <td><a href="<%= students_attend_path %>?lessonId=<%= lesson.id %>" class="templatemo-blue-button">选择该课程</a></td>
                   <% end %>
                 </tr>
             <% end %>
