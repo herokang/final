@@ -56,22 +56,24 @@ class StudentsController < ApplicationController
 
   # @summary: 学生选课
   def attend
-    @student=Student.find(session[:studentId])
+    # @student=Student.find(session[:studentId])
     lessonId=params[:lessonId]
     if params.has_key?(:lessonId)
       lesson=Lesson.find(lessonId)
-      if not lesson.nil?
+      if Assignment.exists?(lesson_id:lessonId,student_id:@student.id)
+        flash[:notice] = "不允许重复选择同一课程"
+      elsif not lesson.nil?
       #if not lesson.nil? and lesson.status==Lesson::STATUS[:attenable] and lesson.students.size < lesson.limit
         @student.lessons<<lesson
         @student.save
-        flash[:notice] = "课程《#{lesson.name}》成功！"
+        flash[:notice] = "选课《#{lesson.name}》成功！"
       else
         flash[:notice] = "课程不存在"
       end
     else
       flash[:notice] = "没有lessonId参数"
     end
-    redirect_to index_path
+    redirect_to "/students/alllessons"
   end
 
   # @summary: 学生退课
@@ -88,8 +90,5 @@ class StudentsController < ApplicationController
     render "" # TODO
   end
 
-  def check_login
-    raise UnAuthorizedException,"学生账户未登录" if session[:studentId].nil?
-  end
 
 end
