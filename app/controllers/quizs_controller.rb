@@ -1,8 +1,10 @@
 require_relative '../utils/my_exception'
+require_relative '../helpers/quizs_helper'
 class QuizsController < ApplicationController
   include MyException
+  include parser
   before_action :check_login, :except => [:new]
-  before_action :check_permission, :only => [:edit,:update,:destroy, :show, :publish]
+  before_action :check_permission, :only => [:edit,:update,:destroy, :show, :publish,:upload]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "问卷操作必须要求老师帐号"
     redirect_to login_path
@@ -88,6 +90,13 @@ class QuizsController < ApplicationController
   # @summary: 通过老师上传的文件生成作业内容
   def upload
     raise IllegalActionException,"请提交有效文件" if params[:upload].nil? or not (params[:upload].is_a? StringIO or params[:upload].is_a? File)
+    content=params[:upload].read
+    questionList=parser(content)
+    for tmp in questionList
+      @quiz.questions.create!(tmp.jsonMap)
+    end
+    @quiz.save!
+    # TODO 返回上传成功
   end
 
   def destroy

@@ -32,6 +32,7 @@ class IndexController < ApplicationController
   end
 
   def loginView
+    puts "hehe"
     render 'index/login'
   end
 
