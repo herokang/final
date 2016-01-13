@@ -2,6 +2,7 @@ require 'digest/md5'
 
 class Student < ActiveRecord::Base
   has_many :lessons, through: :assignments, autosave: false
+  has_many :assignments, autosave: true, dependent: :destroy
   has_many :home_works, dependent: :destroy, autosave: false
   has_one :user,autosave: true, dependent: :destroy
   after_initialize :init
