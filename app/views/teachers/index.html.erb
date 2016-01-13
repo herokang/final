@@ -51,6 +51,13 @@
             </tr>
             </thead>
             <tbody>
+            <% for @lesson in @lessons do %>
+                <td><%= @lesson.lessonNo %></td>
+                <td><%= @lesson.name %></td>
+                <td><%= @lesson.teacher %></td>
+                <td><a href="look_quizs" class="templatemo-edit-btn">查看</a></td>
+                <td><a href="del_class" class="templatemo-edit-btn">删除</a></td>
+            <% end %>
             <tr>
               <td>1.</td>
               <td>John</td>
