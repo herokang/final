@@ -43,9 +43,9 @@ class HomeWorksController < ApplicationController
 
   # @summary: 对于教师用户返回特定问卷的所有已提交作业,对于学生返回特定课程下的所有作业
   def list
-    if not @teacher.nil?
+    if not session[:teacherId].nil?
       if params[:quizId].nil?
-        lessons=@teacher.lessons
+        lessons=Teacher.find(session[:teacherId]).lessons
         quizIds=[]
         for lesson in lessons
           quizIds+=lessons.quizs.map{|q| q.id}
@@ -58,10 +58,10 @@ class HomeWorksController < ApplicationController
         # @homeWorks=HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commited])
         # @homeWorks=@homeWorks+HomeWork.where(quizId:params[:quizId],status:HomeWork::STATUS[:commented])
       end
-    elsif not @student.nil?
+    elsif not session[:studentId].nil?
       if params[:lessonId].nil?
         #返回学生所有的作业
-        @homeWorks=@student.home_works
+        @homeWorks=Student.find(session[:studentId]).home_works
       else
         quizIds=Lesson.find(params[:lessonId]).quizs.map{|q| q.id}
         @homeWorks=HomeWork.where(quizId:quizIds,student_id:session[:studentId])
