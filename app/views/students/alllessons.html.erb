@@ -46,11 +46,16 @@
             </tr>
             </thead>
             <tbody>
+            <% for lesson in @lessons %>
             <tr>
-              <td>1.</td>
+              <td><%= lesson.lessonNo %></td>
               <td>软件工程</td>
               <td>魏峻</td>
+              <% if lesson.isAttend %>
+                  <td><div class="templatemo-edit-btn">已选</div></td>
+              <% else %>
               <td><a href="" class="templatemo-edit-btn">选择该课程</a></td>
+              <% end %>
             </tr>
             <tr>
               <td>2.</td>
@@ -72,17 +77,3 @@
     </div>
   </div>
 </div>
-
-<!-- JS -->
-<!--script type="text/javascript" src="javascripts/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
-<!--script type="text/javascript" src="javascripts/templatemo-script.js"></script>      <!-- Templatemo Script -->
-<script>
-  $(document).ready(function(){
-    // Content widget with background image
-    var imageUrl = $('img.content-bg-img').attr('src');
-    $('.templatemo-content-img-bg').css('background-image', 'url(' + imageUrl + ')');
-    $('img.content-bg-img').hide();
-  });
-</script>
-</body>
-</html>

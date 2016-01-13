@@ -52,7 +52,7 @@ class LessonsController < ApplicationController
         lesson.isAttend=true
       end
     end
-
+    render 'students/alllessons'
   end
 
   def show

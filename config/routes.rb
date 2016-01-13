@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'users/new', to: "users#create"
   post 'index/login',to:"index#login"
   get 'index/logout'
+  get 'students/alllessons',to:"lessons#index"
 
   get 'index/tmpTeacherIndex'
   get 'index', to: "index#index"
