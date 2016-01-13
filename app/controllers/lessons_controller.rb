@@ -2,12 +2,13 @@ require_relative '../utils/my_exception'
 
 
 class LessonsController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   include MyException
   before_action :check_login, :except => [:show,:index,:new]
   before_action :check_permission, :only => [:edit,:update,:destroy]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "课程操作必须要求老师帐号"
-    redirect_to lessons_path
+    redirect_to "index/login"
   end
 
   rescue_from IllegalActionException do |ex|
@@ -25,7 +26,7 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description)
+    params.require(:lesson).permit(:name, :description,:credit,:semester)
   end
 
   def index

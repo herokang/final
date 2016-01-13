@@ -1,6 +1,7 @@
 require_relative '../utils/my_exception'
 
 class HomeWorksController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   include MyException
   before_action :check_permission, :except => [:list]
   before_action :check_list, :only => [:list]

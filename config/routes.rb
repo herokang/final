@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'index/login'
-  post 'index/login',to:"index#login"
+  get 'index/login', to: "index#loginView"
+  post 'users/new', to: "users#create"
   get 'index/register'
-  post 'users/new',to:"users#create"
-
   get 'index/tmpTeacherIndex'
   get 'index', to: "index#index"
 

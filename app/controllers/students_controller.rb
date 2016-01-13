@@ -1,11 +1,12 @@
 require_relative '../utils/my_exception'
 
 class StudentsController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   include MyException
   before_action :check_login, :except => [:show]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = ex.message
-    redirect_to students_path
+    redirect_to "/index/login"
   end
 
   rescue_from IllegalActionException do |ex|
@@ -38,6 +39,7 @@ class StudentsController < ApplicationController
     end
     @student.update_attributes!(info)
     @student.user.update_attributes!(userParams)
+    # @student.save!
     redirect_to student_path(@student)
   end
 
@@ -76,7 +78,7 @@ class StudentsController < ApplicationController
   def lessons
     @student=Student.find(session[:studentId])
     @lessons=@student.lessons
-    redirect_to lessons_path
+    render "" # TODO
   end
 
   #所有课程
