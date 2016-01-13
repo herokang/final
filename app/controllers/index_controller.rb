@@ -40,11 +40,11 @@ class IndexController < ApplicationController
 
   #以下方法和页面为静态页面，后期填数据时再往相关的views里面套
   def tmpTeacherIndex
-
+    render 'students/alllessons'
   end
 
   def StudentCourse
-    
+    render 'students/index'
   end
 
   def Studenthomework
