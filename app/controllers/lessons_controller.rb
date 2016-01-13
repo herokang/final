@@ -54,6 +54,12 @@ class LessonsController < ApplicationController
   end
 
   def create
+    raise IllegalActionException,"请至少选定课程编号!" if params[:lessonNo].nil?
+    if Lesson.exists?(lessonNo:params[:lessonNo])
+      flash[:notice]="不得选用重复的课程编号"
+      redirect_to "/lessons/new"
+      return
+    end
     teacher=Teacher.find(session[:teacherId])
     @lesson = teacher.lessons.create(lesson_params)
     flash[:notice] = "课程《#{@lesson.name}》创建成功！"
