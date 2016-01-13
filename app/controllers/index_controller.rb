@@ -68,6 +68,6 @@ class IndexController < ApplicationController
   end
 
   def Studenthomeworkonline
-
+    render 'teachers/quizs'
   end
 end

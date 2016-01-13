@@ -12,7 +12,7 @@ class QuizsController < ApplicationController
 
   rescue_from IllegalActionException do |ex|
     flash[:notice] = ex.message
-    redirect_to teacher_path(@teacher)
+    redirect_to "/index"
   end
 
   def check_login
@@ -54,7 +54,9 @@ class QuizsController < ApplicationController
   # @summary: 返回登录教师创建的特定问卷
   def show
     # @quiz=Quiz.find(params[:id])
+    @lesson=Lesson.find(params[:lessonId])
     @questionList=@quiz.generate
+    render "teachers/quizs"
   end
 
   # @summary: 创建新问卷
