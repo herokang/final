@@ -27,9 +27,11 @@ class HomeWorksController < ApplicationController
     @homeWork=HomeWork.find(params[:id])
     if not session[:studentId].nil?
       raise IllegalActionException,"无权操作此作业" if @homeWork.student_id!=session[:studentId]
+      @student=Student.find(session[:studentId])
     elsif not session[:teacherId].nil?
       quiz=Quiz.find(@homeWork.quizId)
       raise IllegalActionException,"无权操作此作业" if quiz.lesson.teacher_id!=session[:teacherId]
+      @teacher=Teacher.find(session[:teacherId])
     else
       raise UnAuthorizedException
     end

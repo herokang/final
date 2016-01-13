@@ -18,6 +18,7 @@ class QuizsController < ApplicationController
 
   def check_login
     raise UnAuthorizedException if session[:teacherId].nil?
+    @teacher=Teacher.find(session[:teacherId])
   end
 
   def check_permission
@@ -38,7 +39,7 @@ class QuizsController < ApplicationController
   # @summary 返回登录教师在某课程下布置的所有问卷
   def index
     if params[:lessonId].nil?
-      teacher=Teacher.find(session[:teacherId])
+      # teacher=Teacher.find(session[:teacherId])
       lessonIds=teacher.lessons.map{|l| l.id}
       @quizs=Quiz.where(lesson_id: lessonIds )
     else

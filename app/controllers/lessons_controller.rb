@@ -28,6 +28,7 @@ class LessonsController < ApplicationController
 
   def check_login
     raise UnAuthorizedException if session[:teacherId].nil?
+    @teacher=Teacher.find(session[:teacherId])
   end
 
   def check_permission
@@ -69,7 +70,7 @@ class LessonsController < ApplicationController
       redirect_to "/lessons/new"
       return
     end
-    teacher=Teacher.find(session[:teacherId])
+    # teacher=Teacher.find(session[:teacherId])
     @lesson = teacher.lessons.create(lesson_params)
     flash[:notice] = "课程《#{@lesson.name}》创建成功！"
     redirect_to index_path
