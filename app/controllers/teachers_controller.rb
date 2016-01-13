@@ -3,6 +3,7 @@ class TeachersController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   include MyException
   before_action :check_login, :except => [:show]
+  before_action :paging, :only => [:lessons]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "请先登录对应身份的账户"
     redirect_to "/index/login"
@@ -15,6 +16,15 @@ class TeachersController < ApplicationController
 
   def check_login
     raise UnAuthorizedException,"教师账户未登录" if session[:teacherId].nil?
+  end
+
+  def paging
+    @currentPage=0 if params[:currentPage].nil? else params[:currentPage].to_i
+    if params[:pageCount].nil?
+      @pageCount=20
+    else
+      @pageCount=params[:pageCount].to_i
+    end
   end
 
   def teacherParams
@@ -56,11 +66,10 @@ class TeachersController < ApplicationController
   # @summary: 返回教师所开课程
   def lessons
     @teacher=Teacher.find(session[:teacherId])
-    @lessons=@teacher.lessons
+    # @lessons=@teacher.lessons
+    @lessons=@teacher.lessons[@pageCount*@currentPage,@pageCount]
     redirect_to lessons_path
   end
 
-  def index
-    
-  end
+
 end
