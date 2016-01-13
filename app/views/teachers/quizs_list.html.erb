@@ -1,0 +1,245 @@
+<% content_for :head do %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>练习管理</title>
+    <meta name="description" content="">
+    <meta name="author" content="templatemo">
+<% end %>
+
+<body>
+<!-- Left column -->
+<div class="templatemo-flex-row">
+  <div class="templatemo-sidebar">
+    <header class="templatemo-site-header">
+      <h1>&nbsp;&nbsp;&nbsp;老师好！</h1>
+    </header>
+    <div class="mobile-menu-icon">
+      <i class="fa fa-bars"></i>
+    </div>
+    <nav class="templatemo-left-nav">
+      <ul>
+        <li><a href="#" class="active"><i class="fa fa-home fa-fw"></i>课程管理</a></li>
+        <li><a href="que_entry.html"><i class="fa fa-sliders fa-fw"></i>题目管理</a></li>
+        <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>退出</a></li>
+      </ul>
+    </nav>
+  </div>
+  <!-- Main content -->
+  <div class="templatemo-content-widget white-bg">
+    <h2 class="margin-bottom-10">题目列表</h2>
+    <div class="panel panel-default no-border">
+      <div class="panel-heading border-radius-10">
+        <h2>题目一</h2>
+      </div>
+      <div class="panel-body">
+        <div class="templatemo-flex-row  margin-bottom-30">
+          <div class="col-1">
+            哈哈哈手机卡带回来不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default no-border">
+      <div class="panel-heading border-radius-10">
+        <h2>题目二</h2>
+      </div>
+      <div class="panel-body">
+        <div class="templatemo-flex-row ">
+          <div class="col-1">
+            哈哈哈哈
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default no-border">
+      <div class="panel-heading border-radius-10">
+        <h2>题目三</h2>
+      </div>
+      <div class="panel-body">
+        <div class="templatemo-flex-row ">
+          <div class="col-1">
+            哈哈哈哈
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-left">
+      <button class="templatemo-blue-button"  data-toggle="modal" data-target="#radio">添加单选</button>
+      <button class="templatemo-blue-button"  data-toggle="modal" data-target="#checkbox">添加多选</button>
+      <button class="templatemo-blue-button"  data-toggle="modal" data-target="#judge">添加判断题</button>
+      <!-- 模态框（Modal） -->
+      <div class="modal fade" id="radio" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close"
+                      data-dismiss="modal" aria-hidden="true">
+                &times;
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                添加单选
+              </h4>
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >题目</label>
+              <input type="text" class="form-control" id="class_id">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >A.</label>
+              <input type="text" class="form-control" id="A">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >B.</label>
+              <input type="text" class="form-control" id="B">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >C.</label>
+              <input type="text" class="form-control" id="C">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >D.</label>
+              <input type="text" class="form-control" id="D">
+            </div>
+            <div class="col-lg-12 form-group">
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r4" value="" checked>
+                <label for="r4" class="font-weight-400"><span></span>A</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r5" value="" >
+                <label for="r5" class="font-weight-400"><span></span>B</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r6" value="">
+                <label for="r6" class="font-weight-400"><span></span>C</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r7" value="">
+                <label for="r7" class="font-weight-400"><span></span>D</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default"
+                      data-dismiss="modal">关闭
+              </button>
+              <button type="button" class="btn btn-primary">
+                提交
+              </button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+      </div>
+      <!-- 模态框（Modal） -->
+      <div class="modal fade" id="checkbox" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close"
+                      data-dismiss="modal" aria-hidden="true">
+                &times;
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                添加多选
+              </h4>
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >题目</label>
+              <input type="text" class="form-control" id="class_id">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >A.</label>
+              <input type="text" class="form-control" id="A">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >B.</label>
+              <input type="text" class="form-control" id="B">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >C.</label>
+              <input type="text" class="form-control" id="C">
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >D.</label>
+              <input type="text" class="form-control" id="D">
+            </div>
+            <div class="col-lg-12 form-group">
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="checkbox" name="server" id="c3" value="" checked="">
+                <label for="c3" class="font-weight-400"><span></span>A</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="checkbox" name="member" id="c4" value="">
+                <label for="c4" class="font-weight-400"><span></span>B</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="checkbox" name="expired" id="c5" value="">
+                <label for="c5" class="font-weight-400"><span></span>C</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="checkbox" name="expired" id="c6" value="">
+                <label for="c6" class="font-weight-400"><span></span>D</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default"
+                      data-dismiss="modal">关闭
+              </button>
+              <button type="button" class="btn btn-primary">
+                提交
+              </button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+      </div>
+      <!-- 模态框（Modal） -->
+      <div class="modal fade" id="judge" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close"
+                      data-dismiss="modal" aria-hidden="true">
+                &times;
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                添加判断
+              </h4>
+            </div>
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" >题目</label>
+              <input type="text" class="form-control" id="class_id">
+            </div>
+
+            <div class="col-lg-12 form-group">
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r1" value="" checked="">
+                <label for="r1" class="font-weight-400"><span></span>正确</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r2" value="" >
+                <label for="r2" class="font-weight-400"><span></span>错误</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default"
+                      data-dismiss="modal">关闭
+              </button>
+              <button type="button" class="btn btn-primary">
+                提交
+              </button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+      </div>
+    </div>
+    <!-- JS -->
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>        <!-- jQuery -->
+    <script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>  <!-- http://markusslima.github.io/bootstrap-filestyle/ -->
+    <script type="text/javascript" src="js/templatemo-script.js"></script>        <!-- Templatemo Script -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</body>
