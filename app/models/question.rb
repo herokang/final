@@ -14,7 +14,7 @@ class Question < ActiveRecord::Base
   end
   def transfer()
 
-    info={:descrption => self.description,:score => self.score,
+    info={:description => self.description,:score => self.score,
           :reference => self.reference, :id=>self.id, :questionType=>self.questionType}
     case questionType
       when QuestionType[:selection]
