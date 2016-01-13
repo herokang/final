@@ -42,15 +42,14 @@ class LessonsController < ApplicationController
   def index
     @lessons = Lesson.limit(@pageCount).offset(@currentPage*@pageCount)
     # 对于登录的学生用户,标记他对于某门课的状态
-    for lesson in @lessons
-      lesson.isAttend=false
-    end
 
     if not session[:studentId].nil?
       @student=Student.find(session[:studentId])
-      for lesson in @student.lessons
-        lesson.isAttend=true
-      end
+      # lessonIds=@student.lessons.map{|l| l.id}
+      # for lesson in @lessons
+      #   lesson.isAttend=true if lessonIds.index(lesson.id)
+      # end
+      # @lessons<<Lesson.new({id:10})
     end
     render 'students/alllessons'
   end

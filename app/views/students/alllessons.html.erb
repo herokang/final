@@ -51,25 +51,25 @@
               <td><%= lesson.lessonNo %></td>
               <td>软件工程</td>
               <td>魏峻</td>
-              <% if lesson.isAttend %>
+              <% if lesson.isAttend(@student) %>
                   <td><div class="templatemo-edit-btn">已选</div></td>
               <% else %>
               <td><a href="" class="templatemo-edit-btn">选择该课程</a></td>
               <% end %>
             </tr>
-            <tr>
-              <td>2.</td>
-              <td>数理逻辑</td>
-              <td>高出数</td>
-              <td><a href="" class="templatemo-edit-btn">已选</a></td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>数据挖掘</td>
-              <td>都已提交</td>
-              <td><a href="" class="templatemo-edit-btn">选择该课程</a></td>
-            </tr>
-
+            <!--<tr>-->
+              <!--<td>2.</td>-->
+              <!--<td>数理逻辑</td>-->
+              <!--<td>高出数</td>-->
+              <!--<td><a href="" class="templatemo-edit-btn">已选</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+              <!--<td>3.</td>-->
+              <!--<td>数据挖掘</td>-->
+              <!--<td>都已提交</td>-->
+              <!--<td><a href="" class="templatemo-edit-btn">选择该课程</a></td>-->
+            <!--</tr>-->
+            <% end %>
             </tbody>
           </table>
         </div>
