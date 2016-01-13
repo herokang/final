@@ -16,10 +16,11 @@ class IndexController < ApplicationController
   end
 
   def login
-    @user=User.find_by(account: params[:email], password: params[:password])
+    @user=User.find_by(email: params[:email], password: params[:password])
     if @user.nil?
+      puts "wocao"
       flash[:notice] = "用户名密码错误!"
-      # TODO 登录失败
+      redirect_to "/index/login"
     end
     case @user.userType
       when User::UserType[:student]
@@ -28,7 +29,7 @@ class IndexController < ApplicationController
         session[:teacherId]=@user.teacher.id
     end
     flash[:notice] = "登录成功!"
-    redirect_to "index/index"
+    redirect_to "/index"
 
     # TODO 登录成功逻辑
   end
