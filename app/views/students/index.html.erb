@@ -23,7 +23,7 @@
     </div>
     <nav class="templatemo-left-nav">
       <ul>
-        <li><a href="index.html" class="active"><i class="fa fa-home fa-fw"></i>课程</a></li>
+        <li><a href="<%= index_url %>" class="active"><i class="fa fa-home fa-fw"></i>课程</a></li>
         <li><a href="data-visualization.html"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
         <li><a href="<%= index_logout_path %>"><i class="fa fa-eject fa-fw"></i>退出</a></li>
       </ul>
@@ -54,25 +54,14 @@
             </tr>
             </thead>
             <tbody>
+            <% for lesson in @student.lessons %>
             <tr>
-              <td>1.</td>
-              <td>软件工程</td>
-              <td>都已提交</td>
+              <td><%= lesson.lessonNo %></td>
+              <td><%= lesson.name %></td>
+              <td><%= lesson.teacher.user.name %></td>
               <td><a href="" class="templatemo-edit-btn">作业情况</a></td>
             </tr>
-            <tr>
-              <td>2.</td>
-              <td>数理逻辑</td>
-              <td>1次未交</td>
-              <td><a href="" class="templatemo-edit-btn">作业情况</a></td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>数据挖掘</td>
-              <td>都已提交</td>
-              <td><a href="" class="templatemo-edit-btn">作业情况</a></td>
-            </tr>
-
+            <% end %>
             </tbody>
           </table>
         </div>
