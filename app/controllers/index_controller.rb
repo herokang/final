@@ -14,7 +14,7 @@ class IndexController < ApplicationController
   end
 
   def login
-    @user=User.find_by(account: params[:account], password: params[:password])
+    @user=User.find_by(account: params[:email], password: params[:password])
     if @user.nil?
       flash[:notice] = "用户名密码错误!"
       # TODO 登录失败
@@ -45,7 +45,7 @@ class IndexController < ApplicationController
   end
 
   def StudentCourse
-
+    
   end
 
   def Studenthomework
