@@ -8,8 +8,10 @@ class Lesson < ActiveRecord::Base
   def init
     self.status ||=STATUS[:attendable]
     self.limit ||=100
-    self.isAttend||=false
   end
 
+  def isAttend(student)
+    return true if Assignment.exists?(lesson_id:self.id,student_id:student.id)
+  end
 
 end

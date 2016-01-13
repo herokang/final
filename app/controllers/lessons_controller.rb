@@ -28,6 +28,7 @@ class LessonsController < ApplicationController
 
   def check_login
     raise UnAuthorizedException if session[:teacherId].nil?
+    @teacher=Teacher.find(session[:teacherId])
   end
 
   def check_permission
@@ -36,21 +37,20 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description,:credit,:semester,:limit,:lessonNo)
+    params.permit(:name,:lessonNo)
   end
 
   def index
     @lessons = Lesson.limit(@pageCount).offset(@currentPage*@pageCount)
     # 对于登录的学生用户,标记他对于某门课的状态
-    for lesson in @lessons
-      lesson.isAttend=false
-    end
 
     if not session[:studentId].nil?
       @student=Student.find(session[:studentId])
-      for lesson in @student.lessons
-        lesson.isAttend=true
-      end
+      # lessonIds=@student.lessons.map{|l| l.id}
+      # for lesson in @lessons
+      #   lesson.isAttend=true if lessonIds.index(lesson.id)
+      # end
+      # @lessons<<Lesson.new({id:10})
     end
     render 'students/alllessons'
   end
@@ -70,10 +70,10 @@ class LessonsController < ApplicationController
       redirect_to "/lessons/new"
       return
     end
-    teacher=Teacher.find(session[:teacherId])
+    # teacher=Teacher.find(session[:teacherId])
     @lesson = teacher.lessons.create(lesson_params)
     flash[:notice] = "课程《#{@lesson.name}》创建成功！"
-    redirect_to lessons_path
+    redirect_to index_path
   end
 
   def edit
