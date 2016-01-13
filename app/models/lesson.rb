@@ -8,7 +8,6 @@ class Lesson < ActiveRecord::Base
   def init
     self.status ||=STATUS[:attendable]
     self.limit ||=100
-    self.isAttend||=false
   end
 
 

@@ -36,7 +36,7 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description,:credit,:semester,:limit,:lessonNo)
+    params.permit(:name,:lessonNo)
   end
 
   def index
