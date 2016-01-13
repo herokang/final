@@ -8,7 +8,7 @@ class HomeWorksController < ApplicationController
 
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "请先登录"
-    redirect_to login_path
+    redirect_to "/index/login"
   end
 
   rescue_from IllegalActionException do |ex|

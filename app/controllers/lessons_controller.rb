@@ -8,7 +8,7 @@ class LessonsController < ApplicationController
   before_action :check_permission, :only => [:edit,:update,:destroy]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "课程操作必须要求老师帐号"
-    redirect_to "index/login"
+    redirect_to "/index/login"
   end
 
   rescue_from IllegalActionException do |ex|
@@ -26,7 +26,7 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description,:credit,:semester)
+    params.require(:lesson).permit(:name, :description,:credit,:semester,:limit,:lessonNo)
   end
 
   def index
@@ -55,7 +55,7 @@ class LessonsController < ApplicationController
 
   def create
     teacher=Teacher.find(session[:teacherId])
-    @lesson = teacher.lessons.create!(lesson_params)
+    @lesson = teacher.lessons.create(lesson_params)
     flash[:notice] = "课程《#{@lesson.name}》创建成功！"
     redirect_to lessons_path
   end

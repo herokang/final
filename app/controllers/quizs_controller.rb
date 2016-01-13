@@ -8,7 +8,7 @@ class QuizsController < ApplicationController
   before_action :check_permission, :only => [:edit,:update,:destroy, :show, :publish,:upload]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "问卷操作必须要求老师帐号"
-    redirect_to login_path
+    redirect_to "/index/login"
   end
 
   rescue_from IllegalActionException do |ex|
@@ -72,7 +72,7 @@ class QuizsController < ApplicationController
         end
         info=realQuestion.jsonMap
         info[:score]=ave_score
-        question=@quiz.questions.create!(info)
+        question=@quiz.questions.create(info)
       end
       @quiz.save
     end

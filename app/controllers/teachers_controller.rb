@@ -5,7 +5,7 @@ class TeachersController < ApplicationController
   before_action :check_login, :except => [:show]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "请先登录对应身份的账户"
-    redirect_to teachers_path
+    redirect_to "/index/login"
   end
 
   rescue_from IllegalActionException do |ex|
