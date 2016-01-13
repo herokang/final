@@ -29,7 +29,6 @@ class LessonsController < ApplicationController
   end
 
   def index
-    puts "hehe"
     @lessons = Lesson.all
   end
 

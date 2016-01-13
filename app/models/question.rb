@@ -6,7 +6,9 @@ class Question < ActiveRecord::Base
   QuestionType={:selection => 0,:judge => 1}
   after_initialize :init
   def init
-    self.ratio=0.0
+    self.ratio ||=0.0
+    self.correct ||=0
+    self.count ||=0
   end
   def transfer()
 
@@ -18,6 +20,12 @@ class Question < ActiveRecord::Base
       when QuestionType[:judge]
         return JudgeQuestion(info)
     end
+  end
+
+  # @summary: 计算本题的正确率
+  def coverage
+    self.ratio=1.0*self.correct/self.count
+    return self.ratio
   end
 end
 
