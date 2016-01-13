@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
   end
 
   def questionParam
-    params.permit([:description,:options,:score,:reference,:category])
+    params.permit([:description,:options,:score,:reference,:questionType])
   end
 
   def check_login

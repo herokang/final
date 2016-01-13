@@ -29,20 +29,208 @@
         <nav class="templatemo-top-nav col-lg-12 col-md-12">
           <ul class="text-uppercase">
             <li>《<%= @lesson.name %>》</li>
-            <li><% @quiz.title %></li>
+            <li><%= @quiz.title %></li>
           </ul>
         </nav>
       </div>
     </div>
+
     <div class="templatemo-content-container">
       <div class="templatemo-content-widget white-bg">
         <div class="row form-group">
-          <h2 class="col-lg-12 margin-bottom-10">题目时长：10分钟</h2>
-          <p class="col-lg-12"> 题目描述：说的啥udsaiuh</p>
+          <h2 class="col-lg-12 margin-bottom-10">题目时长：<%= @quiz.limitTime %></h2>
+          <p class="col-lg-12"> 题目描述：<%= @quiz.demand %></p>
         </div>
+
+
+        <div class="form-group text-left">
+          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#radio">添加单选</button>
+          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#checkbox">添加多选</button>
+          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#judge">添加判断题</button>
+          <!-- 模态框（Modal） -->
+          <div class="modal fade" id="radio" tabindex="-1" role="dialog"
+               aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close"
+                          data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">
+                    添加单选
+                  </h4>
+                </div>
+                <form action="<%= teachers_createQuestion_path %>" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >题目</label>
+                  <input type="text" name="description" class="form-control" id="class_id">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >A.</label>
+                  <input type="text" name="options[0]" class="form-control" id="A">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >B.</label>
+                  <input type="text" name="options[1]" class="form-control" id="B">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >C.</label>
+                  <input type="text" name="options[2]" class="form-control" id="C">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >D.</label>
+                  <input type="text" name="options[3]" class="form-control" id="D">
+                </div>
+                <div class="col-lg-12 form-group">
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="radio" name="reference" id="r4" value="0" checked>
+                    <label for="r4" class="font-weight-400"><span></span>A</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="radio" name="reference" id="r5" value="1" >
+                    <label for="r5" class="font-weight-400"><span></span>B</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="radio" name="reference" id="r6" value="2">
+                    <label for="r6" class="font-weight-400"><span></span>C</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="radio" name="reference" id="r7" value="3">
+                    <label for="r7" class="font-weight-400"><span></span>D</label>
+                  </div>
+                </div>
+                  <input type="hidden" name="questionType" value="0">
+                  <input type="hidden" name="quizId" value="<%= @quiz.id %>">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default"
+                          data-dismiss="modal">关闭
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    提交
+                  </button>
+                </div>
+                  </form>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+          </div>
+          <!-- 模态框（Modal） -->
+          <div class="modal fade" id="checkbox" tabindex="-1" role="dialog"
+               aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close"
+                          data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">
+                    添加多选
+                  </h4>
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >题目</label>
+                  <input type="text" name="description" class="form-control" id="class_id">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >A.</label>
+                  <input type="text" name="options[0]" class="form-control" id="A">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >B.</label>
+                  <input type="text" name="options[1]" class="form-control" id="B">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >C.</label>
+                  <input type="text" name="options[2]" class="form-control" id="C">
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >D.</label>
+                  <input type="text" name="options[3]" class="form-control" id="D">
+                </div>
+                <div class="col-lg-12 form-group">
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="checkbox" name="reference" id="c3" value="0" checked="">
+                    <label for="c3" class="font-weight-400"><span></span>A</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="checkbox" name="reference" id="c4" value="1">
+                    <label for="c4" class="font-weight-400"><span></span>B</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="checkbox" name="reference" id="c5" value="2">
+                    <label for="c5" class="font-weight-400"><span></span>C</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="checkbox" name="reference" id="c6" value="3">
+                    <label for="c6" class="font-weight-400"><span></span>D</label>
+                  </div>
+                </div>
+                <input type="hidden" name="questionType" value="1">
+                <input type="hidden" name="quizId" value="<%= @quiz.id %>">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default"
+                          data-dismiss="modal">关闭
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    提交
+                  </button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+          </div>
+          <!-- 模态框（Modal） -->
+          <div class="modal fade" id="judge" tabindex="-1" role="dialog"
+               aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close"
+                          data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">
+                    添加判断
+                  </h4>
+                </div>
+                <div class="col-lg-12 has-success form-group">
+                  <label class="control-label" >题目</label>
+                  <input type="text" class="form-control" id="class_id">
+                </div>
+
+                <div class="col-lg-12 form-group">
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="radio" name="radio" id="r1" value="" checked>
+                    <label for="r1" class="font-weight-400"><span></span>正确</label>
+                  </div>
+                  <div class="margin-right-15 templatemo-inline-block">
+                    <input type="radio" name="radio" id="r2" value="" >
+                    <label for="r2" class="font-weight-400"><span></span>错误</label>
+                  </div>
+                </div>
+                <input type="hidden" name="questionType" value="2">
+                <input type="hidden" name="quizId" value="<%= @quiz.id %>">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default"
+                          data-dismiss="modal">关闭
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    提交
+                  </button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+          </div>
+        </div>
+        <% count=0 %>
+        <% if @questionList %>
+        <% for question in @questionList %>
+            <% count+=1 %>
+            <!--多选-->
+            <% if question.questionType==Question::QuestionType[:single] %>
           <div class="row form-group">
             <div class="col-lg-12 has-success form-group">
-              <label class="control-label" for="inputWithSuccess">1.welcome to Ruby on Rails,the question is that?</label>
+              <label class="control-label" for="inputWithSuccess"><%= count %>.<%= question.description %></label>
             </div>
             <div class="col-lg-12 form-group">
               <div class="margin-right-15 templatemo-inline-block">
@@ -59,10 +247,11 @@
               </div>
             </div>
           </div>
-
+                <% elsif question.questionType==Question::QuestionType[:selection] %>
+                <!--单选-->
           <div class="row form-group">
             <div class="col-lg-12 has-success form-group">
-              <label class="control-label" for="inputWithSuccess">2.welcome to Ruby on Rails,the question is that?</label>
+              <label class="control-label" for="inputWithSuccess"><%= count %>.<%= question.description %></label>
             </div>
             <div class="col-lg-6 col-md-6 form-group">
               <div>
@@ -86,9 +275,11 @@
             </div>
           </div>
 
+                <!--判断-->
+            <% elsif question.questionType==Question::QuestionType[:judge] %>
           <div class="row form-group">
             <div class="col-lg-12 has-success form-group">
-              <label class="control-label" for="inputWithSuccess">3.welcome to Ruby on Rails,the question is that?</label>
+              <label class="control-label" for="inputWithSuccess"><%= count %>.<%= question.description %></label>
             </div>
             <div class="col-lg-12 form-group">
               <div class="margin-right-15 templatemo-inline-block">
@@ -101,32 +292,12 @@
               </div>
             </div>
           </div>
-
-          <div class="row form-group">
-            <div class="col-lg-12 has-success form-group">
-              <label class="control-label" for="inputWithSuccess">3.welcome to Ruby on Rails,the question is that?</label>
-            </div>
-            <div class="col-lg-12 form-group">
-              <div class="margin-right-15 templatemo-inline-block">
-                <input type="radio" name="radio" id="r5" value="" checked>
-                <label for="r5" class="font-weight-400"><span></span>True</label>
-              </div>
-              <div class="margin-right-15 templatemo-inline-block">
-                <input type="radio" name="radio" id="r6" value="" >
-                <label for="r6" class="font-weight-400"><span></span>False</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group text-right">
-            <button type="submit" class="templatemo-blue-button">提交</button>
-          </div>
-        </form>
+            <% else %>
+            <% end %>
+        <% end %>
+        <% end %>
       </div>
 
     </div>
   </div>
 </div>
-
-</body>
-
