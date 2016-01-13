@@ -2,7 +2,7 @@ require_relative '../utils/my_exception'
 
 class QuestionsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
-  include MyException
+  include MyException,QuestionsHelper
   before_action :check_login
   before_action :check_permission, :only => [:update, :destroy]
   rescue_from UnAuthorizedException do |ex|
@@ -12,7 +12,8 @@ class QuestionsController < ApplicationController
 
   rescue_from IllegalActionException do |ex|
     flash[:notice] = ex.message
-    redirect_to questions_path
+    puts ex.message
+    redirect_to question_path
   end
 
   def questionParam

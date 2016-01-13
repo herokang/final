@@ -2,7 +2,7 @@ require_relative '../utils/my_exception'
 require_relative '../helpers/quizs_helper'
 class QuizsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
-  include MyException
+  include MyException,QuestionsHelper
   before_action :check_login, :except => [:new]
   before_action :check_permission, :only => [:edit,:update,:destroy, :show, :publish,:upload]
   rescue_from UnAuthorizedException do |ex|
