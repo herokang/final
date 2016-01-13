@@ -54,7 +54,7 @@ class QuizsController < ApplicationController
   # @summary: 返回登录教师创建的特定问卷
   def show
     # @quiz=Quiz.find(params[:id])
-    @lesson=Lesson.find(params[:lessonId])
+    @lesson=@quiz.lesson
     @questionList=@quiz.generate
     render "teachers/quizs"
   end

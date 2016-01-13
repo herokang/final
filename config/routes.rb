@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post 'teachers/createQuiz',to:"quizs#create"
   get 'teachers/quizs',to:"quizs#show"
   post 'teachers/createQuestion',to:"questions#create"
+  get 'students/questions',to:"home_works#edit"
 
 
 

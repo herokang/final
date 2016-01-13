@@ -53,7 +53,8 @@ class QuestionsController < ApplicationController
       end
     end
 
-    # TODO 返回前端创建成功
+    flash[:notice] = "题目创建成功"
+    redirect_to teachers_quizs_path+"?id="+params[:quizId]
   end
 
   def update
