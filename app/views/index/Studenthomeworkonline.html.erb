@@ -19,24 +19,16 @@
       <div class="square"></div>
       <h1>Trustie</h1>
     </header>
-    <div class="profile-photo-container">
-      <%= image_tag "profile-photo.jpg", alt: "Profile Photo",class: "img-responsive" %>
-      <div class="profile-photo-overlay"></div>
-    </div>
+
     <!-- Search box -->
-    <form class="templatemo-search-form" role="search">
-      <div class="input-group">
-        <button type="submit" class="fa fa-search"></button>
-        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-      </div>
-    </form>
+
     <div class="mobile-menu-icon">
       <i class="fa fa-bars"></i>
     </div>
     <nav class="templatemo-left-nav">
       <ul>
         <li><a href="index.html"><i class="fa fa-home fa-fw"></i>课程</a></li>
-        <li><a href="data-visualization.html"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
+        <li><a href="data-visualization.html" class="active"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
         <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>退出</a></li>
       </ul>
     </nav>
@@ -47,8 +39,9 @@
       <div class="row">
         <nav class="templatemo-top-nav col-lg-12 col-md-12">
           <ul class="text-uppercase">
-            <li><a href="" class="active">课程</a></li>
-            <li><a href="">作业</a></li>
+            <li><a href="" >XX课程</a></li>
+            <li><a href="" >XX作业</a></li>
+            <li><a  class="active">第XX次作业</a></li>
           </ul>
         </nav>
       </div>
@@ -58,7 +51,7 @@
         <h2 class="margin-bottom-10">在线答题</h2>
         <form action="index.html" class="templatemo-login-form" method="post" enctype="multipart/form-data">
 
-          <div class="templatemo-content-widget white-bg col-1">
+          <div class="templatemo-content-widget white-bg col-1" id="fixedMenu_keleyi_com">
             <h3 class="text-uppercase">时间进度</h3>
             <hr>
             <div class="progress">
@@ -129,15 +122,28 @@
             </div>
           </div>
 
+          <div class="row form-group">
+            <div class="col-lg-12 has-success form-group">
+              <label class="control-label" for="inputWithSuccess">3.welcome to Ruby on Rails,the question is that?</label>
+            </div>
+            <div class="col-lg-12 form-group">
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r5" value="" checked>
+                <label for="r5" class="font-weight-400"><span></span>True</label>
+              </div>
+              <div class="margin-right-15 templatemo-inline-block">
+                <input type="radio" name="radio" id="r6" value="" >
+                <label for="r6" class="font-weight-400"><span></span>False</label>
+              </div>
+            </div>
+          </div>
+
           <div class="form-group text-right">
-            <button type="submit" class="templatemo-blue-button">Update</button>
+            <button type="submit" class="templatemo-blue-button">提交</button>
           </div>
         </form>
       </div>
-      <footer class="text-right">
-        <p>Copyright &copy; 2084 Company Name
-          | Designed by <a href="http://www.templatemo.com" target="_parent">templatemo</a></p>
-      </footer>
+
     </div>
   </div>
 </div>
