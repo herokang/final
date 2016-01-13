@@ -31,6 +31,18 @@ class LessonsController < ApplicationController
 
   def index
     @lessons = Lesson.all
+    # 对于登录的学生用户,标记他对于某门课的状态
+    for lesson in @lessons
+      lesson.isAttend=false
+    end
+
+    if not session[:studentId].nil?
+      @student=Student.find(session[:studentId])
+      for lesson in @student.lessons
+        lesson.isAttend=true
+      end
+    end
+
   end
 
   def show
