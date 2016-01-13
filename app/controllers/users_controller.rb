@@ -19,8 +19,9 @@ class UsersController < ApplicationController
     if not exist.nil?
       flash[:notice] = "重复的用户名!"
       redirect_to "/index/register"
+      return
     end
-    exist=User.where(account: userParam[:account]).take
+    exist=User.where(email: userParam[:email]).take
     if not exist.nil?
       flash[:notice] = "重复的邮箱!"
       redirect_to "/index/register"
