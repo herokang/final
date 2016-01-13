@@ -39,15 +39,8 @@ class QuestionsController < ApplicationController
     raise IllIllegalActionException,"请先指定对应的作业!" if params[:quizId].nil?
     quiz=Quiz.find(params[:quizId])
     info=questionParam
-    info[:category]= Question::QuestionType[:selection] if info[:category].nil?
-    case info[:category]
-      when Question::QuestionType[:selection]
-        tmp=SelectQuestion(info)
-      when Question::QuestionType[:judge]
-        tmp=JudgeQuestion(info)
-      else
-        raise IllegalActionException,"选择有效的题型!"
-    end
+    info[:questionType]= Question::QuestionType[:selection] if info[:questionType].nil?
+    tmp=RealQuestion::instance(info)
     question=quiz.questions.create(tmp.jsonMap)# 向数据库写入问题
     if quiz.status == Quiz::STATUS[:assigned]
       # 当作业已经发布时,为每位同学增加该题
@@ -63,19 +56,12 @@ class QuestionsController < ApplicationController
 
   def update
     info=questionParam
-    info[:category]= Question::QuestionType[:selection] if info[:category].nil?
-    case info[:category]
-      when Question::QuestionType[:selection]
-        tmp=SelectQuestion(info)
-      when Question::QuestionType[:judge]
-        tmp=JudgeQuestion(info)
-      else
-        raise IllegalActionException,"选择有效的题型!"
-    end
+    info[:questionType]= Question::QuestionType[:selection] if info[:questionType].nil?
+    tmp=RealQuestion::instance(info)
     @question.update_attributes!(tmp.jsonMap)
   end
 
   def destroy
-    @question.destroy!
+    @question.destroy
   end
 end

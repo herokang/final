@@ -53,7 +53,7 @@ class QuizsController < ApplicationController
 
   # @summary: 返回登录教师创建的特定问卷
   def show
-    @quiz=Quiz.find(params[:id])
+    # @quiz=Quiz.find(params[:id])
     @lesson=Lesson.find(params[:lessonId])
     @questionList=@quiz.generate
     render "teachers/quizs"
@@ -67,14 +67,7 @@ class QuizsController < ApplicationController
     if not params[:questionList].nil?
       ave_score=100/@quiz.number
       for tmp in params[:questionList]
-        case tmp[:questionType]
-          when Question::QuestionType[:selection]
-            realQuestion=SelectQuestion(tmp)
-          when Question::QuestionType[:judge]
-            realQuestion=JudgeQuestion(tmp)
-          else
-            realQuestion=SelectQuestion(tmp)
-        end
+        realQuestion=RealQuestion::instance(tmp)
         info=realQuestion.jsonMap
         info[:score]=ave_score
         question=@quiz.questions.create(info)
@@ -152,7 +145,7 @@ class QuizsController < ApplicationController
     # 问卷为结束或未发布状态下没有
     if @quiz.status=Quiz::STATUS[:assigned]
       quizId=params[:id]
-      homeWorks=HomeWork.where(quizId:quizId).not(status: HomeWork::STATUS[:uncommited])
+      @homeWorks=HomeWork.where("quizId = ? AND status > ?",quizId,HomeWork::STATUS[:uncommited])
       # homeWorks=HomeWork.where(quizId:quizId,status:HomeWork::STATUS[:commited])
       # homeWorks=homeWorks+HomeWork.where(quizId:quizId,status:HomeWork::STATUS[:commented])
       total=homeWorks.length
