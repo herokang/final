@@ -34,6 +34,15 @@ class IndexController < ApplicationController
     # TODO 登录成功逻辑
   end
 
+  def logout
+    if session[:studentId].nil? and session[:teacherId].nil?
+      flash[:notice]="请先登录再注销"
+    end
+    session[:studentId]=nil
+    session[:teacherId]=nil
+    redirect_to "/index"
+  end
+
   def loginView
     puts "hehe"
     render 'index/login'

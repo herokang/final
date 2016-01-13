@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     if not exist.nil?
       flash[:notice] = "重复的邮箱!"
       redirect_to "/index/register"
+      return
     end
 
     userParam[:userType]=User::UserType[:student] if userParam[:userType]!=User::UserType[:teacher]
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
 
     flash[:notice] = "用户创建成功!"
 
-    redirect_to index_login_path
+    redirect_to "/index/login"
   end
 
   def destroy
