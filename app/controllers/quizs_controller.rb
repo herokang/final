@@ -87,7 +87,7 @@ class QuizsController < ApplicationController
 
   # @summary: 通过老师上传的文件生成作业内容
   def upload
-
+    raise IllegalActionException,"请提交有效文件" if params[:upload].nil? or params[:upload]
   end
 
   def destroy
