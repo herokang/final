@@ -15,7 +15,8 @@ class Question < ActiveRecord::Base
     info={:descrption => self.description,:score => self.score, :reference => self.reference, :id=>self.id}
     case questionType
       when QuestionType[:selection]
-        info[:options]=JSON.parse self.options
+        # info[:options]=JSON.parse self.options
+        info[:options]=ActiveSupport::JSON.decode(self.options)
         return SelectQuestion(info)
       when QuestionType[:judge]
         return JudgeQuestion(info)
@@ -52,7 +53,12 @@ class SelectQuestion < RealQuestion
   end
 
   def jsonMap
-
+    return {
+        description: @description,
+        options: ActiveSupport::JSON.encode(@options),
+        score:@score,
+        reference:@reference
+    }
   end
 
 end
@@ -66,6 +72,10 @@ class JudgeQuestion < RealQuestion
   end
 
   def jsonMap
-
+    return {
+        description: @description,
+        score:@score,
+        reference:@reference
+    }
   end
 end
