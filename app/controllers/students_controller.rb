@@ -1,6 +1,7 @@
 require_relative '../utils/my_exception'
 
 class StudentsController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   include MyException
   before_action :check_login, :except => [:show]
   rescue_from UnAuthorizedException do |ex|

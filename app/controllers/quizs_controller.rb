@@ -1,6 +1,7 @@
 require_relative '../utils/my_exception'
 require_relative '../helpers/quizs_helper'
 class QuizsController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   include MyException
   include parser
   before_action :check_login, :except => [:new]

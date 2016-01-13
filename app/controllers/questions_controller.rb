@@ -1,6 +1,7 @@
 require_relative '../utils/my_exception'
 
 class QuestionsController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   include MyException
   before_action :check_login
   before_action :check_permission, :only => [:update, :destroy]

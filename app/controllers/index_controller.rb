@@ -1,6 +1,7 @@
 # 主管首页展示和用户登录,用户注册属于用户创建,应该在UsersController中调用create完成
 
 class IndexController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   def index
     if not session[:studentId].nil?
       @student=Student.find(session[:studentId])
