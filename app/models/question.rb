@@ -1,9 +1,10 @@
 require 'json'
 require_relative "../utils/my_exception"
-
+require_relative "../helpers/questions_helper"
 
 
 class Question < ActiveRecord::Base
+  include QuestionsHelper
   QuestionType={:single=>0,:selection => 1,:judge => 2}
   after_initialize :init
   def init
@@ -19,9 +20,14 @@ class Question < ActiveRecord::Base
       when QuestionType[:selection]
         # info[:options]=JSON.parse self.options
         info[:options]=ActiveSupport::JSON.decode(self.options)
-        return SelectQuestion(info)
+        return SelectQuestion.new(info)
+      when QuestionType[:single]
+        info[:options]=ActiveSupport::JSON.decode(self.options)
+        return SingleQuestion.new(info)
       when QuestionType[:judge]
-        return JudgeQuestion(info)
+        return JudgeQuestion.new(info)
+      else
+        return nil
     end
   end
 

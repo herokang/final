@@ -31,6 +31,8 @@ module QuestionsHelper
   class SelectQuestion < RealQuestion
 
     # 从哈希构造实体
+    attr_accessor :description, :score, :id, :reference, :options, :questionType
+
     def initialize(info)
       @description=info[:description]
       @options=info[:options]
@@ -54,6 +56,10 @@ module QuestionsHelper
 
   class JudgeQuestion < RealQuestion
     # 从哈希构造实体
+
+
+    attr_accessor :description, :score, :id, :reference, :questionType
+
     def initialize(info)
       @description=info[:description]
       @score=info[:score]
@@ -74,6 +80,9 @@ module QuestionsHelper
 
   class SingleQuestion < RealQuestion
     # 从哈希构造实体
+    attr_accessor :description, :score, :id, :reference, :options, :questionType
+
+
     def initialize(info)
       @description=info[:description]
       @score=info[:score]

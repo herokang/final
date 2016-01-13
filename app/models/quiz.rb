@@ -9,8 +9,10 @@ class Quiz < ActiveRecord::Base
   end
   def generate()
     tmp=nil
-    if not @questions.nil?
-      tmp=@questions.map{|q| q.transfer()}
+
+    questionList=Question.where(quiz_id: self.id)
+    if not questionList.nil?
+      tmp=questionList.map{|q| q.transfer()}
     end
 
     # @questionList=tmp
