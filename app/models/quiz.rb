@@ -8,7 +8,10 @@ class Quiz < ActiveRecord::Base
     self.status ||=STATUS[:unassigned]
   end
   def generate()
-    tmp=@questions.map{|q| q.transfer()}
+    if not @questions.nil?
+      tmp=@questions.map{|q| q.transfer()}
+    end
+
     # @questionList=tmp
     return tmp
   end
