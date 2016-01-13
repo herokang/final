@@ -4,6 +4,7 @@ require_relative '../utils/my_exception'
 class LessonsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   include MyException
+  before_action :paging, :only => [:index]
   before_action :check_login, :except => [:show,:index,:new]
   before_action :check_permission, :only => [:edit,:update,:destroy]
   rescue_from UnAuthorizedException do |ex|
@@ -14,6 +15,15 @@ class LessonsController < ApplicationController
   rescue_from IllegalActionException do |ex|
     flash[:notice] = ex.message
     redirect_to teacher_path(@teacher)
+  end
+
+  def paging
+    @currentPage=0 if params[:currentPage].nil? else params[:currentPage].to_i
+    if params[:pageCount].nil?
+      @pageCount=20
+    else
+      @pageCount=params[:pageCount].to_i
+    end
   end
 
   def check_login
@@ -30,7 +40,7 @@ class LessonsController < ApplicationController
   end
 
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.limit(@pageCount).offset(@currentPage*@pageCount)
     # 对于登录的学生用户,标记他对于某门课的状态
     for lesson in @lessons
       lesson.isAttend=false
@@ -42,7 +52,7 @@ class LessonsController < ApplicationController
         lesson.isAttend=true
       end
     end
-
+    render 'students/alllessons'
   end
 
   def show

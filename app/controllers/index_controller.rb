@@ -5,6 +5,8 @@ class IndexController < ApplicationController
   def index
     if not session[:studentId].nil?
       @student=Student.find(session[:studentId])
+      @lessons=@student.lessons
+      # @lessons=@student.lessons[@pageCount*@currentPage,@pageCount]
       render "students/index"
     elsif not session[:teacherId].nil?
       @teacher=Teacher.find(session[:teacherId])
