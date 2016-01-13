@@ -73,11 +73,15 @@ class HomeWorksController < ApplicationController
   # @summary: 展示某份作业的报告
   def show
     # @homeWork=HomeWork.find(params[:id])
+    @quiz=@homeWork.quiz
+    @questionList=@quiz.generate
   end
 
   # @summary: 向学生展示要做的特定作业
   def edit
     # @homeWork=HomeWork.find(params[:id])
+    @quiz=@homeWork.quiz
+    @questionList=@quiz.generate
     @homeWork.start=Time.now if @homeWork.start.nil?
     @homeWork.save
   end
