@@ -67,6 +67,7 @@ class HomeWorksController < ApplicationController
         @homeWorks=HomeWork.where(quizId:quizIds,student_id:session[:studentId])
       end
     end
+    render 'students/homeworks'
   end
 
   # @summary: 展示某份作业的报告
