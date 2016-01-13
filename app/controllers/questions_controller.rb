@@ -40,6 +40,7 @@ class QuestionsController < ApplicationController
     quiz=Quiz.find(params[:quizId])
     info=questionParam
     info[:questionType]= Question::QuestionType[:selection] if info[:questionType].nil?
+
     tmp=RealQuestion::instance(info)
     question=quiz.questions.create(tmp.jsonMap)# 向数据库写入问题
     if quiz.status == Quiz::STATUS[:assigned]

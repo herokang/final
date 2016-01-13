@@ -43,6 +43,9 @@ class RealQuestion
   end
 
   def self.instance(info)
+    if info[:options].is_a? Hash
+      info[:options]=info[:options].sort{|k,v| k.to_i<=>v.to_i}
+    end
     if info[:questionType]==Question::QuestionType[:single]
       return SingleQuestion(info)
     elsif info[:questionType]==Question::QuestionType[:selection]
