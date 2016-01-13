@@ -18,9 +18,9 @@ class IndexController < ApplicationController
   def login
     @user=User.find_by(email: params[:email], password: params[:password])
     if @user.nil?
-      puts "wocao"
       flash[:notice] = "用户名密码错误!"
       redirect_to "/index/login"
+      return
     end
     case @user.userType
       when User::UserType[:student]
