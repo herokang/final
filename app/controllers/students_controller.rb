@@ -33,8 +33,6 @@ class StudentsController < ApplicationController
 
   def edit
     # @student=Student.find(session[:studentId])
-    puts @student.id
-    render "/index"
   end
 
   def update
@@ -61,7 +59,6 @@ class StudentsController < ApplicationController
     # @student=Student.find(session[:studentId])
     lessonId=params[:lessonId]
     if params.has_key?(:lessonId)
-
       lesson=Lesson.find(lessonId)
       if Assignment.exists?(lesson_id:lessonId,student_id:@student.id)
         flash[:notice] = "不允许重复选择同一课程"
@@ -76,7 +73,7 @@ class StudentsController < ApplicationController
     else
       flash[:notice] = "没有lessonId参数"
     end
-    redirect_to "/index"
+    redirect_to "/students/alllessons"
   end
 
   # @summary: 学生退课
