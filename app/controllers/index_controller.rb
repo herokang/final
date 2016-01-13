@@ -2,7 +2,15 @@
 
 class IndexController < ApplicationController
   def index
-    render 'index/login'
+    if not session[:studentId].nil?
+      @student=Student.find(session[:studentId])
+      render ""
+    elsif not session[:teacherId].nil?
+      @teacher=Teacher.find(session[:teacherId])
+      render ""
+    else
+      render "index/login"
+    end
   end
 
   def login
@@ -18,11 +26,12 @@ class IndexController < ApplicationController
         session[:teacherId]=@user.teacher.id
     end
     flash[:notice] = "登录成功!"
+    redirect_to "index/index"
 
     # TODO 登录成功逻辑
   end
 
-  def userlogin
+  def loginView
     render 'index/login'
   end
 
