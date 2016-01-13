@@ -3,7 +3,6 @@ require_relative '../helpers/quizs_helper'
 class QuizsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   include MyException
-  include parser
   before_action :check_login, :except => [:new]
   before_action :check_permission, :only => [:edit,:update,:destroy, :show, :publish,:upload]
   rescue_from UnAuthorizedException do |ex|
@@ -38,15 +37,17 @@ class QuizsController < ApplicationController
 
   # @summary 返回登录教师在某课程下布置的所有问卷
   def index
+    @teacher=Teacher.find(session[:teacherId])
     if params[:lessonId].nil?
       # teacher=Teacher.find(session[:teacherId])
-      lessonIds=teacher.lessons.map{|l| l.id}
+      lessonIds=@teacher.lessons.map{|l| l.id}
       @quizs=Quiz.where(lesson_id: lessonIds )
     else
       lesson=Lesson.find(params[:lessonId])
       raise IllegalActionException,"不是本问卷的所有者" if lesson.teacher_id!=session[:teacherId]
       @quizs=lesson.quizs
     end
+    render 'teachers/exercise'
   end
 
   # @summary: 返回登录教师创建的特定问卷
