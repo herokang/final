@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
   end
 
   def userParams
-    params.require(:user).permit(:name, :avatar)
+    params.permit(:name, :avatar)
   end
 
   def show
@@ -69,7 +69,7 @@ class StudentsController < ApplicationController
 
   # @summary: 学生退课
   def exit
-    assignment=Assignment.where(student_id :session[:studentId],lesson_id:params[:lessonId]).take!
+    assignment=Assignment.where(student_id: session[:studentId],lesson_id:params[:lessonId]).take
     assignment.delete
 
   end

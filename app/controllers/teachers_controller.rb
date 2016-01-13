@@ -22,7 +22,7 @@ class TeachersController < ApplicationController
   end
 
   def userParams
-    params.require(:user).permit(:name, :avatar)
+    params.permit(:name, :avatar)
   end
 
   def show
