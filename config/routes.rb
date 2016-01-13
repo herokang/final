@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'index/login',to:"index#login"
   get 'index/logout'
   get 'students/alllessons',to:"lessons#index"
+  post 'lessons/create',to:"lessons#create"
 
   get 'index/tmpTeacherIndex'
   get 'index', to: "index#index"

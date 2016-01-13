@@ -37,7 +37,7 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description,:credit,:semester,:limit,:lessonNo)
+    params.permit(:name,:lessonNo)
   end
 
   def index
@@ -73,7 +73,7 @@ class LessonsController < ApplicationController
     # teacher=Teacher.find(session[:teacherId])
     @lesson = teacher.lessons.create(lesson_params)
     flash[:notice] = "课程《#{@lesson.name}》创建成功！"
-    redirect_to lessons_path
+    redirect_to index_path
   end
 
   def edit
