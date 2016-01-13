@@ -54,7 +54,7 @@ class QuizsController < ApplicationController
   # @summary: 返回登录教师创建的特定问卷
   def show
     # @quiz=Quiz.find(params[:id])
-    @quiz.generate()
+    @questionList=@quiz.generate
   end
 
   # @summary: 创建新问卷
@@ -84,7 +84,7 @@ class QuizsController < ApplicationController
 
   def edit
     # @quiz=Quiz.find(params[:id])
-    @quiz.generate()
+    @questionList=@quiz.generate
   end
 
 
@@ -93,16 +93,16 @@ class QuizsController < ApplicationController
   end
 
   # @summary: 通过老师上传的文件生成作业内容
-  def upload
-    raise IllegalActionException,"请提交有效文件" if params[:upload].nil? or not (params[:upload].is_a? StringIO or params[:upload].is_a? File)
-    content=params[:upload].read
-    questionList=parser(content)
-    for tmp in questionList
-      @quiz.questions.create!(tmp.jsonMap)
-    end
-    @quiz.save!
-    # TODO 返回上传成功
-  end
+  # def upload
+  #   raise IllegalActionException,"请提交有效文件" if params[:upload].nil? or not (params[:upload].is_a? StringIO or params[:upload].is_a? File)
+  #   content=params[:upload].read
+  #   questionList=parser(content)
+  #   for tmp in questionList
+  #     @quiz.questions.create!(tmp.jsonMap)
+  #   end
+  #   @quiz.save!
+  #   # TODO 返回上传成功
+  # end
 
   def destroy
     # @quiz=Quiz.find(params[:id])
@@ -125,7 +125,8 @@ class QuizsController < ApplicationController
     score=100/@quiz.number  #每道题的分数
     for student in @quiz.lesson.students
       # 这一部分还需斟酌,因为对于autosave的理解不很清楚,不知道homework存储时会不会新建它附带的answer
-      homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id})
+      # homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id})
+      homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id,:title=>@quiz.title})
       range = (0..total-1).to_a
       candidate=range.sample(@quiz.number)
       for i in candidate
@@ -163,6 +164,7 @@ class QuizsController < ApplicationController
       # 此处同样是不知道设置的autosave会不会生效
       @quiz.save
     end
+    @questionList=@quiz.generate
 
     # TODO 渲染报告
   end
