@@ -56,7 +56,7 @@ class StudentsController < ApplicationController
 
   # @summary: 学生选课
   def attend
-    # @student=Student.find(session[:studentId])
+    @student=Student.find(session[:studentId])
     lessonId=params[:lessonId]
     if params.has_key?(:lessonId)
       lesson=Lesson.find(lessonId)
@@ -64,7 +64,7 @@ class StudentsController < ApplicationController
       #if not lesson.nil? and lesson.status==Lesson::STATUS[:attenable] and lesson.students.size < lesson.limit
         @student.lessons<<lesson
         @student.save
-        flash[:notice] = "选课《#{lesson.name}》成功！"
+        flash[:notice] = "课程《#{lesson.name}》成功！"
       else
         flash[:notice] = "课程不存在"
       end
@@ -87,12 +87,6 @@ class StudentsController < ApplicationController
     @lessons=@student.lessons
     render "" # TODO
   end
-
-  #所有课程
-  def alllessons
-    
-  end
-
 
   def check_login
     raise UnAuthorizedException,"学生账户未登录" if session[:studentId].nil?
