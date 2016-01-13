@@ -12,7 +12,8 @@ class Question < ActiveRecord::Base
   end
   def transfer()
 
-    info={:descrption => self.description,:score => self.score, :reference => self.reference, :id=>self.id}
+    info={:descrption => self.description,:score => self.score,
+          :reference => self.reference, :id=>self.id, :questionType=>self.questionType}
     case questionType
       when QuestionType[:selection]
         # info[:options]=JSON.parse self.options
@@ -50,6 +51,8 @@ class SelectQuestion < RealQuestion
     @options=info[:options]
     @score=info[:score]
     @reference=info[:reference]
+    @questionType=info[:questionType]
+    @id=info[:id]
   end
 
   def jsonMap
@@ -57,7 +60,8 @@ class SelectQuestion < RealQuestion
         description: @description,
         options: ActiveSupport::JSON.encode(@options),
         score:@score,
-        reference:@reference
+        reference:@reference,
+        questionType:Question::QuestionType[:selection]
     }
   end
 
@@ -69,13 +73,16 @@ class JudgeQuestion < RealQuestion
     @description=info[:descrption]
     @score=info[:score]
     @reference=info[:reference]
+    @questionType=info[:questionType]
+    @id=info[:id]
   end
 
   def jsonMap
     return {
         description: @description,
         score:@score,
-        reference:@reference
+        reference:@reference,
+        questionType:Question::QuestionType[:judge]
     }
   end
 end
