@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create_params
-    params.permit([:account,:userType,:password,:verified,:email])
+    params.permit([:account,:userType,:password,:verified,:email,:name])
   end
 
   def new
