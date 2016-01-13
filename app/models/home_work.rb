@@ -25,4 +25,8 @@ class HomeWork < ActiveRecord::Base
     self.grade=sum
     return sum
   end
+
+  def quiz
+    return Quiz.find(self.quizId)
+  end
 end
