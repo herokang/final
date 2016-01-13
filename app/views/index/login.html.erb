@@ -6,6 +6,9 @@
 <% end %>
 
 <body class="light-gray-bg">
+<% if flash[:notice] %>
+<%= render 'layouts/notice' %>
+<% end %>
 <div class="templatemo-content-widget templatemo-login-widget white-bg">
   <header class="text-center">
     <div class="square"></div>

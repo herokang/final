@@ -10,6 +10,7 @@ class IndexController < ApplicationController
       @teacher=Teacher.find(session[:teacherId])
       render ""
     else
+      # flash[:notice] = '请登录'
       render "index/login"
     end
   end
