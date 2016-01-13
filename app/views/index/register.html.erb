@@ -9,29 +9,55 @@
   <div class="templatemo-content-widget white-bg">
     <h2 class="margin-bottom-10">源题库 - 注册</h2>
     <p>欢迎注册源题库</p>
-    <form action="<%= index_login_url %>" class="templatemo-login-form" method="get" enctype="multipart/form-data">
+    <form action="<%= new_user_path %>" class="templatemo-login-form" method="post" enctype="multipart/form-data">
       <div class="row form-group">
-        <div class="col-lg-6 col-md-6 form-group">
-          <label for="inputUsername">用户名</label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Admin">
-        </div>
-        <div class="col-lg-6 col-md-6 form-group">
-          <label for="inputEmail">邮箱</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="admin@company.com">
+        <div class="col-lg-8 col-md-4 form-group">
+          <label for="inputUsername">帐号名</label>
+          <input type="text" class="form-control" id="inputUsername" name="account" placeholder="Admin">
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-lg-6 col-md-6 form-group">
+        <div class="col-lg-8 col-md-4 form-group">
+          <label for="inputEmail">邮箱</label>
+          <input type="email" class="form-control" id="inputEmail" name="email" placeholder="admin@company.com">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-8 col-md-4 form-group">
+          <label for="inputUsername">昵称</label>
+          <input type="text" class="form-control" id="inputUsername" name="name" placeholder="Admin">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-8 col-md-4 form-group">
+          <div class="margin-right-15 templatemo-inline-block">
+            <input type="radio" name="userType" id="r4" value="1" checked>
+            <label for="r4" class="font-weight-400"><span></span>学生</label>
+          </div>
+          <div class="margin-right-15 templatemo-inline-block">
+            <input type="radio" name="userType" id="r5" value="2">
+            <label for="r5" class="font-weight-400"><span></span>教师</label>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-8 col-md-4 form-group">
           <label for="inputNewPassword">密码</label>
           <input type="password" class="form-control" id="inputNewPassword">
         </div>
-        <div class="col-lg-6 col-md-6 form-group">
+      </div>
+      <div class="row form-group">
+        <div class="col-lg-8 col-md-4 form-group">
           <label for="inputConfirmNewPassword">确认密码</label>
-          <input type="password" class="form-control" id="inputConfirmNewPassword">
+          <input type="password" class="form-control" name="password"  id="inputConfirmNewPassword">
         </div>
       </div>
-      <div class="form-group text-right">
+      <div class="row form-group">
+        <div class="col-lg-8 col-md-4 form-group">
+          <input type="hidden" name="avatar" value="none">
+          <input type="hidden" name="verified" value="false">
         <button type="submit" class="templatemo-blue-button">注册</button>
+        </div>
       </div>
     </form>
   </div>

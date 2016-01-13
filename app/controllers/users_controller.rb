@@ -9,12 +9,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    userParam=params[:user]
-
-    if userParam[:password]!= userParam[:repeatPassword]
-      flash[:notice] = "两次输入的密码不一致!"
-      redirect_to users_path
-    end
+    userParam=params
+    #
+    # if userParam[:password]!= userParam[:repeatPassword]
+    #   flash[:notice] = "两次输入的密码不一致!"
+    #   redirect_to users_path
+    # end
 
     exist=User.find_by(accout: userParam[:account])
     if not exist.nil?

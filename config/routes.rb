@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   get 'index/login'
+  post 'index/login',to:"index#login"
   get 'index/register'
+  post 'users/new',to:"users#create"
+
   get 'index/tmpTeacherIndex'
   get 'index', to: "index#index"
 
