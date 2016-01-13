@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   before_action :check_permission, :only => [:update, :destroy]
   rescue_from UnAuthorizedException do |ex|
     flash[:notice] = "问卷操作必须要求老师帐号"
-    redirect_to login_path
+    redirect_to "/index/login"
   end
 
   rescue_from IllegalActionException do |ex|

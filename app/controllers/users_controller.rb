@@ -18,12 +18,12 @@ class UsersController < ApplicationController
     exist=User.where(account: userParam[:account]).take
     if not exist.nil?
       flash[:notice] = "重复的用户名!"
-      redirect_to "index/register"
+      redirect_to "/index/register"
     end
     exist=User.where(account: userParam[:account]).take
     if not exist.nil?
       flash[:notice] = "重复的邮箱!"
-      redirect_to "index/register"
+      redirect_to "/index/register"
     end
 
     userParam[:userType]=User::UserType[:student] if userParam[:userType]!=User::UserType[:teacher]
