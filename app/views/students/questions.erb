@@ -195,7 +195,10 @@
         data:{
           answers:postData
         },
-        url:"/students/commitQuestions?id=<%= @homeWork.id %>"
+        url:"/students/commitQuestions?id=<%= @homeWork.id %>",
+        success: function(){
+          window.location.href = "<%= students_homeworks_path %>?issubmit=1&id=<%= @homeWork.id %>";
+        }
       })
     });
 

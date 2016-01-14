@@ -53,6 +53,10 @@ class HomeWorksController < ApplicationController
       raise IllegalActionException,"不得查看未选课的作业" if not Assignment.exists?(student_id:@student.id,lesson_id:params[:lessonId])
       @quizs=Quiz.where("lesson_id = ? AND status > ?",params[:lessonId],Quiz::STATUS[:unassigned])
     end
+    if params[:issubmit]
+      @homeWork=HomeWork.find(params[:id])
+      flash[:notice] = "作业：《"+@homeWork.title+"》提交成功"
+    end
     render 'students/homeworks'
   end
 
@@ -178,8 +182,6 @@ class HomeWorksController < ApplicationController
     # @homeWork.interval=0
     @homeWork.compute()
     @homeWork.save()
-
-    # TODO 返回提交成功
   end
 
   # @summary: 教师为该作业写评语
