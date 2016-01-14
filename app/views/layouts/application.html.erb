@@ -5,6 +5,8 @@
   <%= stylesheet_link_tag "font-awesome.min","templatemo-style" %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery-1.11.2.min.js","templatemo-script","bootstrap-filestyle.min"%>
 </head>
 <body>
 <%= render 'layouts/notice' %>
@@ -12,7 +14,5 @@
 
 <%= yield %>
 
-<%= javascript_include_tag "application" %>
-<%= javascript_include_tag "jquery-1.11.2.min.js","templatemo-script","bootstrap-filestyle.min"%>
 </body>
 </html>
