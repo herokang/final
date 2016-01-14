@@ -33,10 +33,10 @@
           <table class="table table-striped table-bordered templatemo-user-table">
             <thead>
             <tr>
-              <td><a href="" class="white-text templatemo-sort-by">练习编号<span class="caret"></span></a></td>
-              <td><a href="" class="white-text templatemo-sort-by">练习名<span class="caret"></span></a></td>
-              <td><a href="" class="white-text templatemo-sort-by">所属课程<span class="caret"></span></a></td>
-              <td><a href="" class="white-text templatemo-sort-by">时长(分钟)<span class="caret"></span></a></td>
+              <td><a class="white-text templatemo-sort-by">练习编号<span class="caret"></span></a></td>
+              <td><a class="white-text templatemo-sort-by">练习名<span class="caret"></span></a></td>
+              <td><a class="white-text templatemo-sort-by">所属课程<span class="caret"></span></a></td>
+              <td><a class="white-text templatemo-sort-by">时长(分钟)<span class="caret"></span></a></td>
               <td style="min-width: 93px;">练习管理</td>
               <td style="min-width: 93px;">查看报告</td>
               <td style="min-width: 93px;">删除</td>
@@ -50,8 +50,8 @@
                   <td><%= @lesson.name %></td>
                   <td><%= quiz.limitTime %></td>
                   <td><a href="<%= teachers_quizs_path %>?lessonId=<%= quiz.lesson.id %>&id=<%= quiz.id %>" class="templatemo-edit-btn">管理</a></td>
-                  <td><a href="report.html" class="templatemo-edit-btn">查看</a></td>
-                  <td><a href="" class="templatemo-edit-btn">删除</a></td>
+                  <td><a class="templatemo-edit-btn">查看</a></td>
+                  <td><a class="templatemo-edit-btn">删除</a></td>
                 </tr>
             <% end %>
             </tbody>
