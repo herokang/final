@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   get 'index/login', to: "index#loginView"
   get 'index', to: "index#index"
-  get 'index/register'
+  get 'index/register', to:"index#register"
   post 'index/register',to:"users#create"
   post 'users/new', to: "users#create"
   post 'index/login',to:"index#login"
-  get 'index/logout'
+  get 'index/logout', to:"index#logout"
   get 'students/alllessons',to:"lessons#index"
   post 'lessons/create',to:"lessons#create"
   get 'students/attend', to: "students#attend"

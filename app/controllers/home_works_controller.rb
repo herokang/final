@@ -47,7 +47,8 @@ class HomeWorksController < ApplicationController
     @student=Student.find(session[:studentId])
     if params[:leesonId].nil?
       lessonIds=@student.lessons.map{|l| l.id}
-      @quizs=Quiz.where("lesson_id IN ? AND status > ?",lessonIds,Quiz::STATUS[:unassigned])
+      # @quizs=Quiz.where("lesson_id IN ? AND status > ?",lessonIds,Quiz::STATUS[:unassigned])
+      @quizs=Quiz.where(lesson_id: lessonIds,status: Quiz::STATUS[:assigned])
     else
       raise IllegalActionException,"不得查看未选课的作业" if not Assignment.exists?(student_id:@student.id,lesson_id:params[:lessonId])
       @quizs=Quiz.where("lesson_id = ? AND status > ?",params[:lessonId],Quiz::STATUS[:unassigned])
@@ -171,7 +172,7 @@ class HomeWorksController < ApplicationController
   # @summary: 教师为该作业写评语
   def comment
     raise IllegalActionException,"未提交的作业不得写评语" if @homeWork.status=HomeWork::STATUS[:uncommited]
-    @homeWork.comment=params[:compute]
+    @homeWork.comment=params[:comment]
     @homeWork.status=HomeWork::STATUS[:commented]
     @homeWork.save
   end

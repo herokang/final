@@ -18,4 +18,8 @@ class Quiz < ActiveRecord::Base
     # @questionList=tmp
     return tmp
   end
+
+  def isGenerated(student)
+    return HomeWork.exists?(quizId:self.id,student_id:student.id)
+  end
 end
