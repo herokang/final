@@ -82,6 +82,7 @@ class HomeWorksController < ApplicationController
       @homeWork.answers<<answer
     end
     @homeWork.save
+    redirect_to students_questions_path+"?id="+@homeWork.id
   end
 
   # @summary: 对于教师用户返回特定问卷的所有已提交作业,对于学生返回特定课程下的所有作业

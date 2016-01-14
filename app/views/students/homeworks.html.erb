@@ -52,13 +52,19 @@
               <td><%= quiz.lesson.name %></td>
               <td><%= quiz.limitTime %>分钟</td>
               <td><%= quiz.number %></td>
-              <% if homework.start %>
-                  <td><%= homework.start %></td>
-                  <td><a href="" class="templatemo-edit-btn">查看</a></td>
-                  <td><%= homework.grade %></td>
+              <% if homework=quiz.getHomeWork(@student) %>
+                  <% if homework.start %>
+                      <td><%= homework.start %></td>
+                      <td><a href="" class="templatemo-edit-btn">查看</a></td>
+                      <td><%= homework.grade %></td>
+                  <% else %>
+                      <td>未开始</td>
+                      <td><a href="<%= students_questions_path %>?id=<%= homework.id %>" class="templatemo-edit-btn">答题</a></td>
+                      <td>未答题</td>
+                  <% end %>
               <% else %>
-                  <td>未开始</td>
-                  <td><a href="<%= students_questions_path %>?id=<%= homework.id %>" class="templatemo-edit-btn">答题</a></td>
+                  <td>未生成</td>
+                  <td><a href="<%= students_generateQuestion_path %>?quizId=<%= quiz.id %>" class="templatemo-edit-btn">生成</a></td>
                   <td>未答题</td>
               <% end %>
             </tr>
