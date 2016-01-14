@@ -63,6 +63,8 @@ class HomeWorksController < ApplicationController
     raise IllegalActionException," 请至少指定一个问卷" if params[:quizId].nil?
     @quiz=Quiz.find(params[:quizId])
     raise IllegalActionException,"不能参与未选课的作业" if not Assignment.exists?(lesson_id:@quiz.lesson_id,student_id:@student.id)
+    raise IllegalActionException,"不得重复生成作业" if HomeWork.exists?(quizId:@quiz.id,student_id:@student.id)
+
     questions=@quiz.questions
 
 

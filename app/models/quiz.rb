@@ -22,4 +22,8 @@ class Quiz < ActiveRecord::Base
   def isGenerated(student)
     return HomeWork.exists?(quizId:self.id,student_id:student.id)
   end
+
+  def getHomeWork(student)
+    return HomeWork.where(student_id: student.id,quizId: self.id).take
+  end
 end
