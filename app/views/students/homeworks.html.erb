@@ -49,7 +49,7 @@
               <td><%= homework.title %></td>
               <td><%= homework.start %></td>
               <td><%= homework.limitTime  %></td>
-              <td><a href="" class="templatemo-edit-btn">答题</a></td>
+              <td><a href="<%= students_questions_path %>?id=<%= homework.id %>" class="templatemo-edit-btn">答题</a></td>
               <td>未答题</td>
             </tr>
             <% end %>

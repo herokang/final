@@ -60,7 +60,6 @@ class IndexController < ApplicationController
   end
 
   def StudentCourse
-    render 'students/index'
   end
 
   def Studenthomework
@@ -68,6 +67,5 @@ class IndexController < ApplicationController
   end
 
   def Studenthomeworkonline
-    render 'teachers/quizs'
   end
 end

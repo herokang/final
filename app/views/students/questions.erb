@@ -2,13 +2,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>学生在线答题</title>
-
-    <%= javascript_include_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700"%>
-    <!--link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'-->
-    <%= javascript_include_tag "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", "https://oss.maxcdn.com/respond/1.4.2/respond.min.js" %>
-    <%=javascript_include_tag "jquery-1.11.2.min.js","templatemo-script","bootstrap-filestyle.min"%>
-    <%= stylesheet_link_tag "templatemo-style","font-awesome","bootstrap" %>
-
 <% end %>
 
 <body>
@@ -27,9 +20,9 @@
     </div>
     <nav class="templatemo-left-nav">
       <ul>
-        <li><a href="index.html"><i class="fa fa-home fa-fw"></i>课程</a></li>
-        <li><a href="data-visualization.html" class="active"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
-        <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>退出</a></li>
+        <li><a href="<%= index_url %>" class="active"><i class="fa fa-home fa-fw"></i>课程</a></li>
+        <li><a href="<%= students_homeworks_path %>"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
+        <li><a href="<%= index_logout_path %>"><i class="fa fa-eject fa-fw"></i>退出</a></li>
       </ul>
     </nav>
   </div>
@@ -39,9 +32,8 @@
       <div class="row">
         <nav class="templatemo-top-nav col-lg-12 col-md-12">
           <ul class="text-uppercase">
-            <li><a href="" >XX课程</a></li>
-            <li><a href="" >XX作业</a></li>
-            <li><a  class="active">第XX次作业</a></li>
+            <li><%= @quiz.lesson.name %></li>
+            <li><%= @quiz.title %></li>
           </ul>
         </nav>
       </div>
@@ -49,17 +41,20 @@
     <div class="templatemo-content-container">
       <div class="templatemo-content-widget white-bg">
         <h2 class="margin-bottom-10">在线答题</h2>
-        <form action="index.html" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+        <ul class="text-uppercase">
+          <li><%= @quiz.lesson.name %></li>
+          <li><%= @quiz.title %></li>
+        </ul>
 
-          <div class="templatemo-content-widget white-bg col-1" id="fixedMenu_keleyi_com">
-            <h3 class="text-uppercase">时间进度</h3>
-            <hr>
-            <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-            </div>
+        <div class="templatemo-content-widget white-bg col-1" id="fixedMenu_keleyi_com">
+          <h3 class="text-uppercase">时间进度</h3>
+          <hr>
+          <div class="progress">
+            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
           </div>
+        </div>
 
-
+        <form action="<%= students_updateQuestions_path %>" class="templatemo-login-form" method="post" enctype="multipart/form-data">
           <div class="row form-group">
             <div class="col-lg-12 has-success form-group">
               <label class="control-label" for="inputWithSuccess">1.welcome to Ruby on Rails,the question is that?</label>
