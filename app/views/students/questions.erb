@@ -190,13 +190,13 @@
         }
       }
       console.log(postData);
-//      $.ajax({
-//        method:"POST",
-//        data:{
-//          answers:postData
-//        },
-//        url:"/students/commitQuestions?id=<%= @homeWork.id %>"
-//      })
+      $.ajax({
+        method:"POST",
+        data:{
+          answers:postData
+        },
+        url:"/students/commitQuestions?id=<%= @homeWork.id %>"
+      })
     });
 
 </script>
