@@ -3,7 +3,7 @@ require_relative '../utils/my_exception'
 class HomeWorksController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   include MyException
-  before_action :check_permission, :except => [:list]
+  before_action :check_permission, :except => [:list,:listQuiz]
   before_action :check_list, :only => [:list]
 
   rescue_from UnAuthorizedException do |ex|
@@ -39,6 +39,41 @@ class HomeWorksController < ApplicationController
 
   def home_work_params
     params.permit([:answers,:interval])
+  end
+
+  # @summary: 返回某学生特定课程下已发布的作业或所有相关已发布作业
+  def listQuiz
+    if params[:leesonId].nil?
+      lessonIds=@student.lessons.map{|l| l.id}
+      @quizs=Quiz.where("lesson_id IN ? AND status > ?",lessonIds,Quiz::STATUS[:unassigned])
+    else
+      raise IllegalActionException,"不得查看未选课的作业" if not Assignment.exists?(student_id:@student.id,lesson_id:params[:lessonId])
+      @quizs=Quiz.where("lesson_id = ? AND status > ?",params[:lessonId],Quiz::STATUS[:unassigned])
+    end
+  end
+
+  # @sumary: 为学生生成一份作业
+  def generate
+    raise IllegalActionException," 请至少指定一个问卷" if params[:quizId].nil?
+    @quiz=Quiz.find(params[:quizId])
+    raise IllegalActionException,"不能参与未选课的作业" if not Assignment.exists?(lesson_id:@quiz.lesson_id,student_id:@student.id)
+    questions=@quiz.questions
+
+
+    total=questions.length
+    score=100/@quiz.number  #每道题的分数
+    @homework=@student.home_works.create({:interval=>@quiz.limitTime,:quizId=>@quiz.id,:title=>@quiz.title})
+    range = (0..total-1).to_a
+    candidate=range.sample(@quiz.number)
+    for i in candidate
+      answer=Answer.new
+      answer.question_id=questions[i].id
+      answer.score=score
+      # answer.homeWork_id=@homeWork.id
+      # answer.save
+      @homeWork.answers<<answer
+    end
+    @homeWork.save
   end
 
   # @summary: 对于教师用户返回特定问卷的所有已提交作业,对于学生返回特定课程下的所有作业
@@ -122,7 +157,7 @@ class HomeWorksController < ApplicationController
       end
     end
     @homeWork.status=HomeWork::STATUS[:commited]
-    @homeWork.interval=0
+    # @homeWork.interval=0
     @homeWork.compute()
     @homeWork.save()
     # TODO 返回提交成功
