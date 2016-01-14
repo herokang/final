@@ -20,10 +20,5 @@ Rails.application.routes.draw do
   get 'teachers/publish',to:"quizs#publish"
 
 
-
-  get 'index/Studenthomework'
-  get 'index/Studenthomeworkonline'
-  get 'index/StudentCourse'
-
   root 'index#index'
 end
