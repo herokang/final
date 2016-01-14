@@ -69,19 +69,20 @@ class HomeWorksController < ApplicationController
 
 
     total=questions.length
-    score=100/@quiz.number  #每道题的分数
+    perScore=100/@quiz.number  #每道题的分数
     @homework=@student.home_works.create({:interval=>@quiz.limitTime,:quizId=>@quiz.id,:title=>@quiz.title})
     range = (0..total-1).to_a
     candidate=range.sample(@quiz.number)
     for i in candidate
       answer=Answer.new
+      # answer.question_id=questions[i].id
       answer.question_id=questions[i].id
-      answer.score=score
-      # answer.homeWork_id=@homeWork.id
-      # answer.save
-      @homeWork.answers<<answer
+      answer.score=perScore
+      answer.homeWork_id=@homework.id
+      answer.save
+      # @homework.answers<<answer
     end
-    @homeWork.save
+    # @homework.save
     redirect_to students_questions_path+"?id="+@homeWork.id
   end
 
@@ -144,7 +145,7 @@ class HomeWorksController < ApplicationController
       raise IllegalActionException,"非法的请求参数" if not info[:answers].is_a? Array
       raise IllegalActionException,"非法的请求参数" if info[:answers].size != @homeWork.answers.length
       for i in (0..@homeWork.answers.length)
-        @homeWork.answers[i].record=info[:answers][i]
+        @homeWork.answers[i].solution=info[:answers][i]
       end
     end
     # @homeWork.interval=info[:interval] if not info[:interval.nil?] and info[:interval]<@homeWork.interval
@@ -162,7 +163,7 @@ class HomeWorksController < ApplicationController
       raise IllegalActionException,"非法的请求参数" if not params[:answers].is_a? Array
       raise IllegalActionException,"非法的请求参数" if params[:answers].size != @homeWork.answers.length
       for i in (0..@homeWork.answers.length)
-        @homeWork.answers[i].record=params[:answers][i]
+        @homeWork.answers[i].solution=params[:answers][i]
       end
     end
     @homeWork.status=HomeWork::STATUS[:commited]
