@@ -182,7 +182,9 @@
           $("input[name=selection_"+i+"]:checked").each(function(){
             tmp.push($(this).val());
           })
-          postData.push(tmp.join(""));
+          solution=tmp.join("");
+          if(!tmp)solution="";
+          postData.push(solution);
         }else{
           alert("题目类型错误");
         }

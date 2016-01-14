@@ -12,7 +12,8 @@ class HomeWork < ActiveRecord::Base
   # @summary: 为作业评分,同时为对应的作业题增加统计量
   def compute()
     sum=0
-    for answer in @answers
+    answers=Answer.where(home_work_id: self.id)
+    for answer in answers
       question=answer.question
       question.count+=1
       if answer.discriminate

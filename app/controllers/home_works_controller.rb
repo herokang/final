@@ -78,7 +78,7 @@ class HomeWorksController < ApplicationController
       # answer.question_id=questions[i].id
       answer.question_id=questions[i].id
       answer.score=perScore
-      answer.homeWork_id=@homework.id
+      answer.home_work_id=@homework.id
       answer.save
       # @homework.answers<<answer
     end
@@ -160,11 +160,11 @@ class HomeWorksController < ApplicationController
     # @homeWork=HomeWork.find(params[:id])
     raise IllegalActionException,"不得提交已提交的作业" if @homeWork.status!=HomeWork::STATUS[:uncommited]
     if not params[:answers].nil?
-      @answers=Answer.where(homeWork_id: @homeWork.id)
+      @answers=Answer.where(home_work_id: @homeWork.id)
       raise IllegalActionException,"非法的请求参数" if not params[:answers].is_a? Array
        puts @answers.length
       # raise IllegalActionException,"非法的请求参数" if params[:answers].length != @homeWork.answers.length
-      for i in (0..@answers.length)
+      for i in (0..@answers.length-1)
         answer=@answers[i]
         answer.solution=params[:answers][i]
         answer.save
