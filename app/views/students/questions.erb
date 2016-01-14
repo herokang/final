@@ -39,17 +39,16 @@
     </div>
     <div class="templatemo-content-container">
       <div class="templatemo-content-widget white-bg">
-        <h2 class="margin-bottom-10">在线答题</h2>
-        <ul class="text-uppercase">
-          <li><%= @quiz.lesson.name %></li>
-          <li><%= @quiz.title %></li>
-        </ul>
-
+        <h2 class="margin-bottom-10"><%= @quiz.lesson.name %> / <%= @quiz.title %></h2>
+        <div class="row form-group">
+          <h2 class="col-lg-12 margin-bottom-10">练习时长：<%= @quiz.limitTime %>分钟</h2>
+          <p class="col-lg-12"> 练习描述：<%= @quiz.demand %></p>
+        </div>
         <div class="templatemo-content-widget white-bg col-1" id="fixedMenu_keleyi_com">
           <h3 class="text-uppercase">时间进度</h3>
           <hr>
           <div class="progress">
-            <div class="progress-bar progress-bar-warning" id="progressbar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+            <div class="progress-bar progress-bar-warning" id="progressbar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
           </div>
         </div>
 
@@ -135,7 +134,7 @@
           <% end %>
 
           <div class="form-group text-right">
-            <button type="submit" class="templatemo-blue-button">提交</button>
+            <button type="submit" id="submitBtn" class="templatemo-blue-button">提交</button>
           </div>
         </form>
       </div>
@@ -145,7 +144,18 @@
 </div>
 
 <script type="text/javascript">
-    var totalTime = parseInt(<%= @quiz.limitTime %>);
-    var beginTime = <%= @homeWork.start %>
+    var totalTime = parseInt(<%= @quiz.limitTime %>)*60;
+    var beginTime = Date.parse("<%= @homeWork.start %>");
+    function update(){
+      var p = (((new Date()).getTime() - beginTime)/10)/totalTime;
+      if(p>100){
+        i=window.clearInterval(i);
+        p=100;
+        alert('同学,已到达交卷时间,作业将自动提交！');
+        $("#submitBtn").click();
+      }
+      $('#progressbar').attr("style","width: "+p+"%;");
+    };
+    var i = setInterval("update()",1000);
 </script>
 
