@@ -2,8 +2,7 @@
 <html>
 <head>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag "templatemo-style","font-awesome.min" %>
+  <%= stylesheet_link_tag "font-awesome.min","templatemo-style" %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>
@@ -13,6 +12,7 @@
 
 <%= yield %>
 
+<%= javascript_include_tag "application" %>
 <%= javascript_include_tag "jquery-1.11.2.min.js","templatemo-script","bootstrap-filestyle.min"%>
 </body>
 </html>

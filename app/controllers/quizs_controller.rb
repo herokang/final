@@ -138,6 +138,8 @@ class QuizsController < ApplicationController
     end
     @quiz.status=Quiz::STATUS[:assigned]
     @quiz.save
+    flash[:notice] = "发布成功"
+    redirect_to teachers_quizs_path+"?id="+params[:id]
   end
 
   # @summary: 生成作业情况统计报告

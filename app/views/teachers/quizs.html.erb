@@ -38,7 +38,7 @@
     <div class="templatemo-content-container">
       <div class="templatemo-content-widget white-bg">
         <div class="row form-group">
-          <h2 class="col-lg-12 margin-bottom-10">练习时长：<%= @quiz.limitTime %></h2>
+          <h2 class="col-lg-12 margin-bottom-10">练习时长：<%= @quiz.limitTime %>分钟</h2>
           <p class="col-lg-12"> 练习描述：<%= @quiz.demand %></p>
         </div>
 
@@ -47,7 +47,12 @@
           <button class="templatemo-blue-button"  data-toggle="modal" data-target="#radio">添加单选</button>
           <button class="templatemo-blue-button"  data-toggle="modal" data-target="#checkbox">添加多选</button>
           <button class="templatemo-blue-button"  data-toggle="modal" data-target="#judge">添加判断题</button>
-          <!-- 模态框（Modal） -->
+          <% if @quiz.status==Quiz::STATUS[:unassigned]  %>
+          <button class="templatemo-blue-button" style="background-color: #7171C6;" onclick="window.location.href='<%= teachers_publish_path %>?id=<%= @quiz.id %>'">发布</button>
+          <% else %>
+              <button class="templatemo-blue-button" style="background-color: #7171C6;">已发布</button>
+        <% end %>
+              <!-- 模态框（Modal） -->
           <div class="modal fade" id="radio" tabindex="-1" role="dialog"
                aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -195,7 +200,8 @@
                     添加判断
                   </h4>
                 </div>
-                <div class="col-lg-12 has-success form-group">
+                <form action="<%= teachers_createQuestion_path %>" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+                  <div class="col-lg-12 has-success form-group">
                   <label class="control-label" >题目</label>
                   <input type="text" name="description" class="form-control" id="class_id">
                 </div>
@@ -220,6 +226,7 @@
                     提交
                   </button>
                 </div>
+                  </form>
               </div><!-- /.modal-content -->
             </div><!-- /.modal -->
           </div>
@@ -237,20 +244,20 @@
             </div>
             <div class="col-lg-12 form-group">
               <div class="margin-right-15 templatemo-inline-block">
-                <input type="checkbox" name="single[<%= count %>]" id="c1" value="0" <%= 'checked' if question.reference.index '0' %>>
-                <label for="c1" class="font-weight-400"><span></span><%= question.options[0] %></label>
+                <input type="checkbox" name="single[<%= count %>]" id="c1[<%= count %>]" value="0" <%= 'checked' if question.reference.index '0' %>>
+                <label for="c1[<%= count %>]" class="font-weight-400"><span></span><%= question.options[0] %></label>
               </div>
               <div class="margin-right-15 templatemo-inline-block">
-                <input type="checkbox" name="single[<%= count %>]" id="c2" value="1" <%= 'checked' if question.reference.index '1' %>>
-                <label for="c2" class="font-weight-400"><span></span><%= question.options[1] %></label>
+                <input type="checkbox" name="single[<%= count %>]" id="c2[<%= count %>]" value="1" <%= 'checked' if question.reference.index '1' %>>
+                <label for="c2[<%= count %>]" class="font-weight-400"><span></span><%= question.options[1] %></label>
               </div>
               <div class="margin-right-15 templatemo-inline-block">
-                <input type="checkbox" name="single[<%= count %>]" id="c3" value="2" <%= 'checked' if question.reference.index '2' %>>
-                <label for="c3" class="font-weight-400"><span></span><%= question.options[2] %></label>
+                <input type="checkbox" name="single[<%= count %>]" id="c3[<%= count %>]" value="2" <%= 'checked' if question.reference.index '2' %>>
+                <label for="c3[<%= count %>]" class="font-weight-400"><span></span><%= question.options[2] %></label>
               </div>
               <div class="margin-right-15 templatemo-inline-block">
-                <input type="checkbox" name="single[<%= count %>]" id="c4" value="3" <%= 'checked' if question.reference.index '3' %>>
-                <label for="c4" class="font-weight-400"><span></span><%= question.options[3] %></label>
+                <input type="checkbox" name="single[<%= count %>]" id="c4[<%= count %>]" value="3" <%= 'checked' if question.reference.index '3' %>>
+                <label for="c4[<%= count %>]" class="font-weight-400"><span></span><%= question.options[3] %></label>
               </div>
             </div>
           </div>
@@ -263,20 +270,20 @@
             <div class="col-lg-6 col-md-6 form-group">
               <div>
                 <div class="templatemo-block margin-bottom-5">
-                  <input type="radio" name="single[<%= count %>]" id="r1" value="A" <%= 'checked' if question.reference=='0' %>>
-                  <label for="r1" class="font-weight-400"><span></span><%= question.options[0] %></label>
+                  <input type="radio" name="single[<%= count %>]" id="r1[<%= count %>]" <%= 'checked' if question.reference=='0' %>>
+                  <label for="r1[<%= count %>]" class="font-weight-400"><span></span><%= question.options[0] %></label>
                 </div>
                 <div class="templatemo-block margin-bottom-5">
-                  <input type="radio" name="single[<%= count %>]" id="r2" value="B" <%= 'checked' if question.reference=='1' %>>
-                  <label for="r2" class="font-weight-400"><span></span><%= question.options[1] %></label>
+                  <input type="radio" name="single[<%= count %>]" id="r2[<%= count %>]" <%= 'checked' if question.reference=='1' %>>
+                  <label for="r2[<%= count %>]" class="font-weight-400"><span></span><%= question.options[1] %></label>
                 </div>
                 <div class="templatemo-block margin-bottom-5">
-                  <input type="radio" name="single[<%= count %>]" id="r3" value="C" <%= 'checked' if question.reference=='2' %>>
-                  <label for="r3" class="font-weight-400"><span></span><%= question.options[2] %></label>
+                  <input type="radio" name="single[<%= count %>]" id="r3[<%= count %>]" <%= 'checked' if question.reference=='2' %>>
+                  <label for="r3[<%= count %>]" class="font-weight-400"><span></span><%= question.options[2] %></label>
                 </div>
                 <div class="templatemo-block margin-bottom-5">
-                  <input type="radio" name="single[<%= count %>]" id="r4" value="D" <%= 'checked' if question.reference=='3' %>>
-                  <label for="r4" class="font-weight-400"><span></span><%= question.options[3] %></label>
+                  <input type="radio" name="single[<%= count %>]" id="r4[<%= count %>]" <%= 'checked' if question.reference=='3' %>>
+                  <label for="r4[<%= count %>]" class="font-weight-400"><span></span><%= question.options[3] %></label>
                 </div>
               </div>
             </div>
@@ -290,12 +297,12 @@
             </div>
             <div class="col-lg-12 form-group">
               <div class="margin-right-15 templatemo-inline-block">
-                <input type="radio" name="radio" id="r5" value="" checked>
-                <label for="r5" class="font-weight-400"><span></span>True</label>
+                <input type="radio" name="single[<%= count %>]" id="r5<%= count %>" value="" <%= 'checked' if question.reference=='0' %>>
+                <label for="r5<%= count %>" class="font-weight-400"><span></span>True</label>
               </div>
               <div class="margin-right-15 templatemo-inline-block">
-                <input type="radio" name="radio" id="r6" value="" >
-                <label for="r6" class="font-weight-400"><span></span>False</label>
+                <input type="radio" name="single[<%= count %>]" id="r6<%= count %>" value="" <%= 'checked' if question.reference=='1' %>>
+                <label for="r6<%= count %>" class="font-weight-400"><span></span>False</label>
               </div>
             </div>
           </div>
