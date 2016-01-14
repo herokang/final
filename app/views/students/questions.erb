@@ -62,7 +62,7 @@
                   <% if question.questionType==Question::QuestionType[:selection] %>
                       <div class="row form-group">
                         <div class="col-lg-12 has-success form-group">
-                          <label class="control-label" for="inputWithSuccess"><%= count %>.<%= question.description %></label>
+                          <label class="control-label" for="inputWithSuccess"><%= count+1 %>.<%= question.description %></label>
                         </div>
                         <div class="col-lg-12 form-group">
                           <div class="margin-right-15 templatemo-inline-block">
@@ -87,7 +87,7 @@
                       <!--单选-->
                       <div class="row form-group">
                         <div class="col-lg-12 has-success form-group">
-                          <label class="control-label" for="inputWithSuccess"><%= count %>.<%= question.description %></label>
+                          <label class="control-label" for="inputWithSuccess"><%= count+1 %>.<%= question.description %></label>
                         </div>
                         <div class="col-lg-6 col-md-6 form-group">
                           <div>
@@ -115,7 +115,7 @@
                   <% elsif question.questionType==Question::QuestionType[:judge] %>
                       <div class="row form-group">
                         <div class="col-lg-12 has-success form-group">
-                          <label class="control-label" for="inputWithSuccess"><%= count %>.<%= question.description %></label>
+                          <label class="control-label" for="inputWithSuccess"><%= count+1 %>.<%= question.description %></label>
                         </div>
                         <div class="col-lg-12 form-group">
                           <div class="margin-right-15 templatemo-inline-block">
