@@ -45,9 +45,9 @@
 
         <div class="form-group text-left">
           <% if @quiz.status==Quiz::STATUS[:unassigned]  %>
-          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#radio">添加单选</button>
+          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#radio" onclick="$('#r4').attr('checked','checked')">添加单选</button>
           <button class="templatemo-blue-button"  data-toggle="modal" data-target="#checkbox">添加多选</button>
-          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#judge">添加判断题</button>
+          <button class="templatemo-blue-button"  data-toggle="modal" data-target="#judge" onclick="$('#r1').attr('checked','checked')">添加判断题</button>
           <button class="templatemo-blue-button" style="background-color: #7171C6;" onclick="window.location.href='<%= teachers_publish_path %>?id=<%= @quiz.id %>'">发布</button>
           <% else %>
               <button class="templatemo-blue-button" style="background-color: #7171C6;">已发布</button>
