@@ -13,6 +13,9 @@ module QuestionsHelper
         info[:options]=info[:options].sort{|a,b| a[0].to_i<=>b[0].to_i}
         info[:options]=info[:options].map{|x| x[1]}
       end
+      if info[:reference].is_a? Hash
+        info[:reference]=info[:reference].values.join
+      end
 
       info[:questionType]= info[:questionType].to_i
       if info[:questionType]==Question::QuestionType[:single]

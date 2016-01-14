@@ -17,8 +17,9 @@ class QuestionsController < ApplicationController
   end
 
   def questionParam
-    tmp=params.permit([:description,:options,:reference,:questionType])
+    tmp=params.permit([:description,:options,:questionType])
     tmp[:options]=params[:options]
+    tmp[:reference]=params[:reference]
     return tmp
   end
 
