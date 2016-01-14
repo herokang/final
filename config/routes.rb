@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'lessons/create',to:"lessons#create"
   get 'students/attend', to: "students#attend"
   get 'teachers/exercise',to: "quizs#index"
-  get 'students/homeworks',to: "home_works#list"
+  get 'students/homeworks',to: "home_works#listQuiz"
   post 'teachers/createQuiz',to:"quizs#create"
   get 'teachers/quizs',to:"quizs#show"
   post 'teachers/createQuestion',to:"questions#create"

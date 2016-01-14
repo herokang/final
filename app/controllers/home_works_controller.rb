@@ -3,7 +3,7 @@ require_relative '../utils/my_exception'
 class HomeWorksController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   include MyException
-  before_action :check_permission, :except => [:list,:listQuiz]
+  before_action :check_permission, :except => [:list,:listQuiz,:generate]
   before_action :check_list, :only => [:list]
 
   rescue_from UnAuthorizedException do |ex|
@@ -43,6 +43,8 @@ class HomeWorksController < ApplicationController
 
   # @summary: 返回某学生特定课程下已发布的作业或所有相关已发布作业
   def listQuiz
+    raise UnAuthorizedException if not session[:studentId]
+    @student=Student.find(session[:studentId])
     if params[:leesonId].nil?
       lessonIds=@student.lessons.map{|l| l.id}
       @quizs=Quiz.where("lesson_id IN ? AND status > ?",lessonIds,Quiz::STATUS[:unassigned])
@@ -50,10 +52,13 @@ class HomeWorksController < ApplicationController
       raise IllegalActionException,"不得查看未选课的作业" if not Assignment.exists?(student_id:@student.id,lesson_id:params[:lessonId])
       @quizs=Quiz.where("lesson_id = ? AND status > ?",params[:lessonId],Quiz::STATUS[:unassigned])
     end
+    render 'students/homeworks'
   end
 
   # @sumary: 为学生生成一份作业
   def generate
+    raise UnAuthorizedException if not session[:studentId]
+    @student=Student.find(session[:studentId])
     raise IllegalActionException," 请至少指定一个问卷" if params[:quizId].nil?
     @quiz=Quiz.find(params[:quizId])
     raise IllegalActionException,"不能参与未选课的作业" if not Assignment.exists?(lesson_id:@quiz.lesson_id,student_id:@student.id)

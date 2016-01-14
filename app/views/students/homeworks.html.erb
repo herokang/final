@@ -40,18 +40,18 @@
               <td><a href="" class="white-text templatemo-sort-by">限时<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">题数<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">开始时间<span class="caret"></span></a></td>
-              <td><a href="" class="white-text templatemo-sort-by">作业状态<span class="caret"></span></a></td>
+              <td style="min-width: 93px;"><a href="" class="white-text templatemo-sort-by">作业状态<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">分数<span class="caret"></span></a></td>
             </tr>
             </thead>
             <tbody>
-            <% for homework in @homeWorks %>
+            <% for quiz in @quizs %>
             <tr>
-              <td><%= homework.quizId %></td>
-              <td><%= homework.title %></td>
-              <td><%= homework.quiz.lesson.name %></td>
-              <td><%= homework.quiz.limitTime %>分钟</td>
-              <td><%= homework.quiz.number %></td>
+              <td><%= quiz.quizId %></td>
+              <td><%= quiz.title %></td>
+              <td><%= quiz.lesson.name %></td>
+              <td><%= quiz.limitTime %>分钟</td>
+              <td><%= quiz.number %></td>
               <% if homework.start %>
                   <td><%= homework.start %></td>
                   <td><a href="" class="templatemo-edit-btn">查看</a></td>
