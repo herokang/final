@@ -17,7 +17,7 @@ class HomeWork < ActiveRecord::Base
       question.count+=1
       if answer.discriminate
         question.correct+=1
-        sum+=question.score
+        sum+=answer.score
       end
       question.save!
       # answer.save!

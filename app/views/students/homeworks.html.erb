@@ -20,8 +20,8 @@
     </div>
     <nav class="templatemo-left-nav">
       <ul>
-        <li><a href="<%= index_url %>" class="active"><i class="fa fa-home fa-fw"></i>课程</a></li>
-        <li><a href="<%= students_homeworks_path %>"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
+        <li><a href="<%= index_url %>"><i class="fa fa-home fa-fw"></i>课程</a></li>
+        <li><a href="<%= students_homeworks_path %>" class="active"><i class="fa fa-bar-chart fa-fw"></i>作业</a></li>
         <li><a href="<%= index_logout_path %>"><i class="fa fa-eject fa-fw"></i>退出</a></li>
       </ul>
     </nav>
@@ -36,41 +36,42 @@
             <tr>
               <td><a href="" class="white-text templatemo-sort-by">编号<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">作业标题<span class="caret"></span></a></td>
+              <td><a href="" class="white-text templatemo-sort-by">所属课程<span class="caret"></span></a></td>
+              <td><a href="" class="white-text templatemo-sort-by">限时<span class="caret"></span></a></td>
+              <td><a href="" class="white-text templatemo-sort-by">题数<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">开始时间<span class="caret"></span></a></td>
-              <td><a href="" class="white-text templatemo-sort-by">限时(分钟)<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">作业状态<span class="caret"></span></a></td>
               <td><a href="" class="white-text templatemo-sort-by">分数<span class="caret"></span></a></td>
             </tr>
             </thead>
             <tbody>
-            <%= for homework in @homeWorks %>
+            <% for homework in @homeWorks %>
             <tr>
               <td><%= homework.quizId %></td>
               <td><%= homework.title %></td>
-              <td><%= homework.start %></td>
-              <td><%= homework.limitTime  %></td>
-              <td><a href="<%= students_questions_path %>?id=<%= homework.id %>" class="templatemo-edit-btn">答题</a></td>
-              <td>未答题</td>
+              <td><%= homework.quiz.lesson.name %></td>
+              <td><%= homework.quiz.limitTime %>分钟</td>
+              <td><%= homework.quiz.number %></td>
+              <% if homework.start %>
+                  <td><%= homework.start %></td>
+                  <td><a href="" class="templatemo-edit-btn">查看</a></td>
+                  <td><%= homework.grade %></td>
+              <% else %>
+                  <td>未开始</td>
+                  <td><a href="<%= students_questions_path %>?id=<%= homework.id %>" class="templatemo-edit-btn">答题</a></td>
+                  <td>未答题</td>
+              <% end %>
             </tr>
             <% end %>
             <tr>
-              <td>2.</td>
-              <td>第二次作业</td>
-              <td>2016/01/10</td>
-              <td>2016/01/12</td>
-              <td><a href="" class="templatemo-edit-btn">答题</a></td>
-              <td>未答题</td>
-            </tr>
-            <tr>
               <td>3.</td>
               <td>第三次作业</td>
+              <td>第三次作业</td>
               <td>2016/01/10</td>
-              <td>2016/01/12</td>
+              <td>2</td><td>2</td>
               <td><a href="" class="templatemo-edit-btn">查看</a></td>
               <td>92</td>
             </tr>
-
-
             </tbody>
           </table>
         </div>

@@ -68,6 +68,7 @@ class HomeWorksController < ApplicationController
     for i in candidate
       answer=Answer.new
       answer.question_id=questions[i].id
+      answer.score=score
       # answer.homeWork_id=@homeWork.id
       # answer.save
       @homeWork.answers<<answer
@@ -154,7 +155,7 @@ class HomeWorksController < ApplicationController
       end
     end
     @homeWork.status=HomeWork::STATUS[:commited]
-    @homeWork.interval=0
+    # @homeWork.interval=0
     @homeWork.compute()
     @homeWork.save()
     # TODO 返回提交成功
