@@ -116,26 +116,22 @@ class QuizsController < ApplicationController
     questions=@quiz.questions
     raise IllegalActionException,"已发布的作业不允许重复发布" if @quiz.status!=Quiz::STATUS[:unassigned]
     raise IllegalActionException,"发布的题数不应超过总题数" if @quiz.number > @quiz.questions.length
-    total=questions.length
-    score=100/@quiz.number  #每道题的分数
-    for student in @quiz.lesson.students
-      # 这一部分还需斟酌,因为对于autosave的理解不很清楚,不知道homework存储时会不会新建它附带的answer
-      # homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id})
-      homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id,:title=>@quiz.title})
-      range = (0..total-1).to_a
-      candidate=range.sample(@quiz.number)
-      for i in candidate
-        # answer=homework.answers.build()
-        # answer.question_id=questions[i].id
-
-        answer=Answer.new
-        answer.question_id=questions[i].id
-        answer.homeWork_id=homework.id
-        # answer.save
-        homework.answers<<answer
-      end
-      homework.save
-    end
+    # total=questions.length
+    # score=100/@quiz.number  #每道题的分数
+    # for student in @quiz.lesson.students
+    #   # 这一部分还需斟酌,因为对于autosave的理解不很清楚,不知道homework存储时会不会新建它附带的answer
+    #   # homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id})
+    #   homework=student.home_works.create!({:interval=>@quiz.limitTime,:quizId=>@quiz.id,:title=>@quiz.title})
+    #   range = (0..total-1).to_a
+    #   candidate=range.sample(@quiz.number)
+    #   for i in candidate
+    #     answer=Answer.new
+    #     answer.question_id=questions[i].id
+    #     answer.homeWork_id=homework.id
+    #     homework.answers<<answer
+    #   end
+    #   homework.save
+    # end
     @quiz.status=Quiz::STATUS[:assigned]
     @quiz.save
     flash[:notice] = "发布成功"
