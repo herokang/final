@@ -115,7 +115,7 @@ class QuizsController < ApplicationController
     # @quiz = Quiz.find(params[:id])
     questions=@quiz.questions
     raise IllegalActionException,"已发布的作业不允许重复发布" if @quiz.status!=Quiz::STATUS[:unassigned]
-    raise IllegalActionException,"发布的题数不应超过总题数" if @quiz.number > @quiz.questions.length
+    raise IllegalActionException,"发布的题数不应少于总题数" if @quiz.number > @quiz.questions.length
     # total=questions.length
     # score=100/@quiz.number  #每道题的分数
     # for student in @quiz.lesson.students
