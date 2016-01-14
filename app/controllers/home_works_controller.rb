@@ -126,7 +126,11 @@ class HomeWorksController < ApplicationController
   def edit
     # @homeWork=HomeWork.find(params[:id])
     @quiz=@homeWork.quiz
-    @questionList=@quiz.generate
+    @questionList=[]
+    for answer in @homeWork.answers
+      @questionList<<answer.question.transfer()
+    end
+    # @questionList=@quiz.generate
     @homeWork.start=Time.now if @homeWork.start.nil?
     @homeWork.save
     render 'students/questions'
