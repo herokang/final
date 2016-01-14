@@ -52,12 +52,12 @@
           </div>
         </div>
 
-        <form action="<%= students_commitQuestions_path %>" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+        <!--<form action="<%= students_commitQuestions_path %>" class="templatemo-login-form" method="post" enctype="multipart/form-data">-->
           <input type="hidden" name="id" value="<%= @homeWork.id %>">
           <% count=0 %>
           <% if @questionList %>
               <% for question in @questionList %>
-                  <% count+=1 %>
+
                   <!--多选-->
                   <% if question.questionType==Question::QuestionType[:selection] %>
                       <div class="row form-group">
@@ -66,19 +66,19 @@
                         </div>
                         <div class="col-lg-12 form-group">
                           <div class="margin-right-15 templatemo-inline-block">
-                            <input type="checkbox" name="single[<%= count %>]" id="c1[<%= count %>]" value="0">
+                            <input type="checkbox" name="select_<%= count %>" id="c1[<%= count %>]" value="0">
                             <label for="c1[<%= count %>]" class="font-weight-400"><span></span><%= question.options[0] %></label>
                           </div>
                           <div class="margin-right-15 templatemo-inline-block">
-                            <input type="checkbox" name="single[<%= count %>]" id="c2[<%= count %>]" value="1">
+                            <input type="checkbox" name="select_<%= count %>" id="c2[<%= count %>]" value="1">
                             <label for="c2[<%= count %>]" class="font-weight-400"><span></span><%= question.options[1] %></label>
                           </div>
                           <div class="margin-right-15 templatemo-inline-block">
-                            <input type="checkbox" name="single[<%= count %>]" id="c3[<%= count %>]" value="2">
+                            <input type="checkbox" name="select_<%= count %>" id="c3[<%= count %>]" value="2">
                             <label for="c3[<%= count %>]" class="font-weight-400"><span></span><%= question.options[2] %></label>
                           </div>
                           <div class="margin-right-15 templatemo-inline-block">
-                            <input type="checkbox" name="single[<%= count %>]" id="c4[<%= count %>]" value="3">
+                            <input type="checkbox" name="select_<%= count %>" id="c4[<%= count %>]" value="3">
                             <label for="c4[<%= count %>]" class="font-weight-400"><span></span><%= question.options[3] %></label>
                           </div>
                         </div>
@@ -92,19 +92,19 @@
                         <div class="col-lg-6 col-md-6 form-group">
                           <div>
                             <div class="templatemo-block margin-bottom-5">
-                              <input type="radio" name="single[<%= count %>]" id="r1[<%= count %>]">
+                              <input type="radio" name="single_<%= count %>" value="0" id="r1[<%= count %>]">
                               <label for="r1[<%= count %>]" class="font-weight-400"><span></span><%= question.options[0] %></label>
                             </div>
                             <div class="templatemo-block margin-bottom-5">
-                              <input type="radio" name="single[<%= count %>]" id="r2[<%= count %>]">
+                              <input type="radio" name="single_<%= count %>" value="1" id="r2[<%= count %>]">
                               <label for="r2[<%= count %>]" class="font-weight-400"><span></span><%= question.options[1] %></label>
                             </div>
                             <div class="templatemo-block margin-bottom-5">
-                              <input type="radio" name="single[<%= count %>]" id="r3[<%= count %>]">
+                              <input type="radio" name="single_<%= count %>" value="2" id="r3[<%= count %>]">
                               <label for="r3[<%= count %>]" class="font-weight-400"><span></span><%= question.options[2] %></label>
                             </div>
                             <div class="templatemo-block margin-bottom-5">
-                              <input type="radio" name="single[<%= count %>]" id="r4[<%= count %>]">
+                              <input type="radio" name="single_<%= count %>" value="3" id="r4[<%= count %>]">
                               <label for="r4[<%= count %>]" class="font-weight-400"><span></span><%= question.options[3] %></label>
                             </div>
                           </div>
@@ -119,24 +119,25 @@
                         </div>
                         <div class="col-lg-12 form-group">
                           <div class="margin-right-15 templatemo-inline-block">
-                            <input type="radio" name="single[<%= count %>]" id="r5<%= count %>" value="">
+                            <input type="radio" name="judge_<%= count %>" id="r5<%= count %>" value="1">
                             <label for="r5<%= count %>" class="font-weight-400"><span></span>True</label>
                           </div>
                           <div class="margin-right-15 templatemo-inline-block">
-                            <input type="radio" name="single[<%= count %>]" id="r6<%= count %>" value="">
+                            <input type="radio" name="judge_<%= count %>" id="r6<%= count %>" value="0">
                             <label for="r6<%= count %>" class="font-weight-400"><span></span>False</label>
                           </div>
                         </div>
                       </div>
                   <% else %>
                   <% end %>
+                <% count+=1 %>
               <% end %>
           <% end %>
 
           <div class="form-group text-right">
             <button type="submit" id="submitBtn" class="templatemo-blue-button">提交</button>
           </div>
-        </form>
+        <!--</form>-->
       </div>
 
     </div>
@@ -157,5 +158,44 @@
       $('#progressbar').attr("style","width: "+p+"%;");
     };
     var i = setInterval("update()",1000);
+    var questionTypes = [];
+    <% i=0 %>
+    <% for question in @questionList %>
+    questionTypes.push(<%= question.questionType %>);
+
+    <% end %>
+
+    $("#submitBtn").click(function(){
+      var postData = [];
+      var tmp = '';
+      for(var i = 0;i<<%= count %>;i++){
+        if(questionTypes[i]==0){
+          tmp = $("input[name=single_"+i+"]:checked").val()
+          if(!tmp) tmp="";
+          postData.push(tmp )
+        }else if(questionTypes[i]==2){
+          tmp=$("input[name=judge_"+i+"]:checked").val()
+          if(!tmp) tmp="";
+          postData.push(  tmp)
+        }else if(questionTypes[i]==1){
+          tmp=[]
+          $("input[name=selection_"+i+"]:checked").each(function(){
+            tmp.push($(this).val());
+          })
+          postData.push(tmp.join(""));
+        }else{
+          alert("题目类型错误");
+        }
+      }
+      console.log(postData);
+      $.ajax({
+        method:"POST",
+        data:{
+          answers:postData
+        },
+        url:"/students/commitQuestions?id=<%= @homeWork.id %>"
+      })
+    });
+
 </script>
 

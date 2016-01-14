@@ -160,16 +160,21 @@ class HomeWorksController < ApplicationController
     # @homeWork=HomeWork.find(params[:id])
     raise IllegalActionException,"不得提交已提交的作业" if @homeWork.status!=HomeWork::STATUS[:uncommited]
     if not params[:answers].nil?
+      @answers=Answer.where(homeWork_id: @homeWork.id)
       raise IllegalActionException,"非法的请求参数" if not params[:answers].is_a? Array
-      raise IllegalActionException,"非法的请求参数" if params[:answers].size != @homeWork.answers.length
-      for i in (0..@homeWork.answers.length)
-        @homeWork.answers[i].solution=params[:answers][i]
+       puts @answers.length
+      # raise IllegalActionException,"非法的请求参数" if params[:answers].length != @homeWork.answers.length
+      for i in (0..@answers.length)
+        answer=@answers[i]
+        answer.solution=params[:answers][i]
+        answer.save
       end
     end
     @homeWork.status=HomeWork::STATUS[:commited]
     # @homeWork.interval=0
     @homeWork.compute()
     @homeWork.save()
+
     # TODO 返回提交成功
   end
 
