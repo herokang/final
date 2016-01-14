@@ -179,24 +179,24 @@
           postData.push(  tmp)
         }else if(questionTypes[i]==1){
           tmp=[]
-          $("input[name=selection_"+i+"]:checked").each(function(){
+          $("input[name=select_"+i+"]:checked").each(function(){
             tmp.push($(this).val());
-          })
+          });
           solution=tmp.join("");
-          if(!tmp)solution="";
+          if(!solution) solution="";
           postData.push(solution);
         }else{
           alert("题目类型错误");
         }
       }
       console.log(postData);
-      $.ajax({
-        method:"POST",
-        data:{
-          answers:postData
-        },
-        url:"/students/commitQuestions?id=<%= @homeWork.id %>"
-      })
+//      $.ajax({
+//        method:"POST",
+//        data:{
+//          answers:postData
+//        },
+//        url:"/students/commitQuestions?id=<%= @homeWork.id %>"
+//      })
     });
 
 </script>
