@@ -105,7 +105,9 @@ class HomeWorksController < ApplicationController
     end
     # @homeWork.interval=info[:interval] if not info[:interval.nil?] and info[:interval]<@homeWork.interval
     @homeWork.save!
-    # TODO 返回修改成功
+
+    flash[:notice] = "作业：《"+@homeWork.title+"》提交成功"
+    redirect_to students_homeworks_path
   end
 
   # @summay: 学生提交作业,后台自动评分
