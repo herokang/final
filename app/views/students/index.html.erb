@@ -49,7 +49,7 @@
               <td><%= lesson.lessonNo %></td>
               <td><%= lesson.name %></td>
               <td><%= lesson.teacher.user.name %></td>
-              <td><a href="<%= students_homeworks_path %>?leesonId=<%= lesson.id %>" class="templatemo-edit-btn">作业情况</a></td>
+              <td><a href="<%= students_homeworks_path %>?lessonId=<%= lesson.id %>" class="templatemo-edit-btn">作业情况</a></td>
             </tr>
             <% end %>
             </tbody>

@@ -13,6 +13,7 @@ class HomeWorksController < ApplicationController
 
   rescue_from IllegalActionException do |ex|
     flash[:notice] = ex.message
+    redirect_to "/index"
   end
 
   def check_list
@@ -45,12 +46,12 @@ class HomeWorksController < ApplicationController
   def listQuiz
     raise UnAuthorizedException if not session[:studentId]
     @student=Student.find(session[:studentId])
-    if params[:leesonId].nil?
+    if params[:lessonId].nil?
       lessonIds=@student.lessons.map{|l| l.id}
       # @quizs=Quiz.where("lesson_id IN ? AND status > ?",lessonIds,Quiz::STATUS[:unassigned])
       @quizs=Quiz.where(lesson_id: lessonIds,status: Quiz::STATUS[:assigned])
     else
-      raise IllegalActionException,"不得查看未选课的作业" if not Assignment.exists?(student_id:@student.id,lesson_id:params[:lessonId])
+      raise IllegalActionException,"不得查看未选课的作业" if not Assignment.where(:student_id=>@student.id,:lesson_id=>params[:lessonId].to_i).exists?
       @quizs=Quiz.where("lesson_id = ? AND status > ?",params[:lessonId],Quiz::STATUS[:unassigned])
     end
     if params[:issubmit]
