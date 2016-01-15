@@ -146,9 +146,11 @@
 
 <script type="text/javascript">
     var totalTime = parseInt(<%= @quiz.limitTime %>)*60;
-    var beginTime = Date.parse("<%= @homeWork.start %>");
+    var beginTime = <%= @homeWork.start.to_f %>*1000;
+    console.log(beginTime);
     function update(){
       var p = (((new Date()).getTime() - beginTime)/10)/totalTime;
+      console.log(p);
       if(p>100){
         i=window.clearInterval(i);
         p=100;
@@ -157,7 +159,7 @@
       }
       $('#progressbar').attr("style","width: "+p+"%;");
     };
-    var i = setInterval("update()",1000);
+    var i = window.setInterval("update()",1000);
     var questionTypes = [];
     <% i=0 %>
     <% for question in @questionList %>
